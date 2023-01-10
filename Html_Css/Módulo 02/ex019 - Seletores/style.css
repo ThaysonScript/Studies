@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+/*
+    Em HTML  id é igual a # em css
+    Em HTML class é igual a . em css
+*/
+
+/*
+
+Identificadores especificão algum elemento do html e quando alterados servem apenas para eles
+
+Só pode usar uma vez o id em todo o código
+
+Já o class pode usar quantas vezes quiser
+
+!Colocar, quando for especificar, a forma, não o que representa
+
+*/
+
+body {
+    background-color: rgb(166, 236, 185);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    color: rgb(9, 110, 20);
+}
+
+h1#principal {
+    text-align: center;
+    background-color: green;
+    color: white;
+}
+
+h2 {
+    color: rgba(33, 120, 46, 0.752);
+}
+
+.basico {
+    color: rgb(111, 111, 245);
+}
+
+.intermediario {
+    color: rgb(242, 191, 38);
+}
+
+.avancado {
+    color: rgb(245, 100, 100);
+}
+
+.destaque {
+    background-color: rgb(80, 176, 255);
+}
