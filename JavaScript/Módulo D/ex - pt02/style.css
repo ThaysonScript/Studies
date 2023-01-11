@@ -1,0 +1,32 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(44, 140, 218);
+    line-height: 40px;
+}
+
+header {
+    color: white;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+section {
+    background-color: white;
+    max-width: 400px;
+    max-height: 400px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.498);
+}
+
+footer {
+    color: white;
+    text-align: center;
+    margin-top: 15px;
+}
