@@ -1,0 +1,1 @@
+Neste modulo tem os arrays, funcções e objetos(parecidos com dicionarios em python)

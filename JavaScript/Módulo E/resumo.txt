@@ -1,0 +1,2 @@
+Neste modulo tem os varios tipos de laços em js:
+    for, for in, for of, while e do while

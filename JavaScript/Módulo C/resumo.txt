@@ -1,0 +1,4 @@
+Neste modulo tem o que é DOM, manipulação de DOM e como adicionar o DOM direto no js com o addEventListener
+
+COMPLEMENTO:
+    para pegar o valor de um input html se usa o " .value "

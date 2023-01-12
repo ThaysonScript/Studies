@@ -1,0 +1,1 @@
+Neste modulo tem os tipos de dados, OPERADORES, concatenação e conversão de dados, parseint, parsefloat, number, tostring, tofixed, length, toUpperCase, toLowerCase e replace

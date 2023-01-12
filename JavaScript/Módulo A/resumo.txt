@@ -1,0 +1,5 @@
+Neste Modulo tem uso dos windows alert, confirm e prompt
+
+complemento TIPOS DE SAIDAS:
+    console.log
+    window.document.write
