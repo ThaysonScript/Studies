@@ -1,0 +1,1 @@
+Neste modulo tem as condicionais if e switch case
