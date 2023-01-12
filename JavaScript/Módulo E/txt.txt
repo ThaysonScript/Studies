@@ -1,0 +1,55 @@
+LOOPS:
+    FOR:
+        for(expressão: condição: incremento) {
+            bloco a ser executado
+        }
+
+    FOR IN (percorrer um array ou objeto todo entregando apenas o indice do valor):
+        for(chave/variavel in valor) {
+            bloco a ser executado
+        }
+
+        EXEMPLO:
+            const person = {fname:"John", lname:"Doe", age:25}; 
+
+            let txt = "";
+            for (let x in person) {
+            txt += person[x] + " ";
+            }
+
+            resultado = o for vai pegar a chave do objeto person e vai atribuir na variavel x, o txt vai receber o person[ com a chave x ] e vai dar como resultado o valor da chave e dps concatenar com um espaço  ----> John Doe 25
+
+    FOR OF (percorre algo entregando o valor da variavel):
+        for(variavel in valor/iterable) {
+            bloco a ser executado
+        }
+
+        EXEMPLOS:
+            const cars = ["BMW", "Volvo", "Mini"];
+
+            let text = "";
+            for (let x of cars) {
+            text += x + " ";
+            }    ----> resultado = BMW Volvo Mini
+
+
+            let language = "JavaScript";
+
+            let text = "";
+            for (let x of language) {
+            text += x + " ";
+            }   ----> resultado = J a v a S c r i p t
+
+
+    DO WHILE (execute primeiro, verifique dps):
+        do {
+            // code block to be executed
+            condition++
+        }
+        while (condition);
+
+    WHILE:
+        while (condition) {
+            // code block to be executed
+            condition++
+        }
