@@ -45,8 +45,8 @@ function verificar() {
                 img.setAttribute('src', 'idosoF.png')
             };
         };
-        res.style.textAlign = 'center';
-        res.innerHTML = `Detectamos ${genero} com ${qtd_ano} anos.`;
-        res.appendChild(img)
+        result.style.textAlign = 'center';
+        result.innerHTML = `Detectamos ${genero} com ${qtd_ano} anos.`;
+        result.appendChild(img)
     };
 };
