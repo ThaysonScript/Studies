@@ -1,0 +1,61 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    line-height: 25px;
+}
+
+h1.inicial {
+    text-align: center;
+    padding: 10px;
+
+    background-color: black;
+    color: white;
+}
+
+header {
+    background-color: rgb(255, 255, 255);
+    padding: 15px;
+}
+
+header p {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+nav > a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    margin-top: 15px;
+    padding: 3px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+main {
+    background-color: rgb(136, 136, 136);
+    color: rgb(0, 0, 0);
+    margin-top: 20px;
+}
+
+main h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 15px;
+}
+
+section {
+    padding: 20px;
+}
+
+table, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+pre, code {
+    background-color: white;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
