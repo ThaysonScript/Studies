@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabelas</title>
+    <style>
+        body {
+            background-color: rgb(42, 42, 42);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <section id="definir tabela">
+        <h1>Definir uma tabela HTML</h1>
+        <p>Uma tabela em HTML consiste em células de tabela dentro de linhas e colunas.</p>
+        <table>
+            <tr>
+              <th>Company</th>
+              <th>Contact</th>
+              <th>Country</th>
+            </tr>
+            <tr>
+              <td>Alfreds Futterkiste</td>
+              <td>Maria Anders</td>
+              <td>Germany</td>
+            </tr>
+            <tr>
+              <td>Centro comercial Moctezuma</td>
+              <td>Francisco Chang</td>
+              <td>Mexico</td>
+            </tr>
+          </table>
+    </section>
+    <hr>
+    <section id="celulas de tabela">
+        <h1>Células da tabela</h1>
+        <p>Cada célula da tabela é definida por uma tag <code>td</code>.</p>
+        <p>td significa dados da tabela.</p>
+        <p>Tudo entre td são o conteúdo da célula da tabela.</p>
+        <table>
+        <tr>
+            <td>Emil</td>
+            <td>Tobias</td>
+            <td>Linus</td>
+        </tr>
+        </table>
+    </section>
+    <hr>
+    <section id="linhas de tabela">
+        <h1>Linhas da Tabela</h1>
+        Cada linha da tabela começa com uma tag <code>tr</code>.
+        
+        <p>tr significa linha da tabela.</p>
+        
+        <p>Exemplo</p>
+        <table>
+            <tr id="linha 01">
+                <td>Emil</td>
+                <td>Tobias</td>
+                <td>Linus</td>
+            </tr>
+            <tr id="linha 02">
+                <td>16</td>
+                <td>14</td>
+                <td>10</td>
+            </tr>
+        </table>
+    </section>
+    <hr>
+    <section id="cabeçalho">
+        <h1>Cabeçalhos de tabela</h1>
+        <p>Às vezes, você deseja que suas células sejam células de cabeçalho de tabela. Nesses casos, use a tag th em vez da tag td:</p>
+
+        <p>th significa cabeçalho da tabela.</p>
+
+        <p>Exemplo</p>
+        <p>Deixe a primeira linha ser células de cabeçalho da tabela:</p>
+
+        <table>
+        <tr>
+            <th>Person 1</th>
+            <th>Person 2</th>
+            <th>Person 3</th>
+        </tr>
+        <tr>
+            <td>Emil</td>
+            <td>Tobias</td>
+            <td>Linus</td>
+        </tr>
+        <tr>
+            <td>16</td>
+            <td>14</td>
+            <td>10</td>
+        </tr>
+        </table>
+    </section>
+
+      <!--
+        TABLE - definir uma tabela
+        TD - dados de uma tabela/conteúdo de uma tabela;
+        TH - cabeçalho de uma tabela
+      -->
+</body>
+</html>

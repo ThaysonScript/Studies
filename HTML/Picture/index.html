@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture</title>
+</head>
+<body>
+    <!--
+        O elemento HTML <picture> permite exibir diferentes imagens para diferentes dispositivos ou tamanhos de tela.
+    -->
+
+    <!--
+        SOURCE - atributo para definir a troca de imagens a partir do tamanho da tela;
+        MEDIA - defini a largura em si;
+        SRCSET - defini o local onde a imagem tá.
+
+        Lógica da tag = se eu defino min-width: 700px; emtão a imagem da comida irá aparecer somente se a tela for maior do que 700px, sendo menor, mostrará a imagem do carro, e, se o carro for menor que 550px, irá cair na da garota que será o elemento final, praticamente um default 
+    -->
+
+    <picture>
+        <source media="(min-width: 700px)" srcset="imgs/img_food.jpg">
+        <source media="(min-width: 550px)" srcset="imgs/img_car.jpg">
+        <img src="imgs/img_girl.jpg">
+      </picture>
+</body>
+</html>

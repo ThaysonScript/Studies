@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapas de Imagens</title>
+</head>
+<body>
+    <a href="https://www.w3schools.com/html/html_images_imagemap.asp">Pagina de doc</a>
+
+    <section>
+        <p>Vamos usar o Map:</p>
+
+        <!-- PRIMEIRO DEVE-SE CRIAR A IMG JUNTO COM UM ATRIBUTO usemap -->
+        <img src="Imagens/computers/workplace.jpg" alt="Workplace" usemap="#mesmo nome do atributo do elemento map">
+
+        <!-- DEFINIMOS O ELEMENTO MAP JUNTO COM O MESMO NOME DO ATRIBUTO usemap -->
+        
+        <map name="mesmo nome do atributo do elemento map">
+
+            <!-- DEFINIMOS, ENTÃO, A ÁREA CLICÁVEL -->
+
+            <!--
+                Você deve definir a forma da área clicável e pode escolher um destes valores:
+
+                rect- define uma região retangular;
+                circle- define uma região circular;
+                poly- define uma região poligonal;
+                default- define toda a região.
+
+                Você também deve definir algumas coordenadas para poder colocar a área clicável na imagem. 
+            -->
+
+            <area shape="rect" coords="34, 44, 270, 350" href="computer.html">
+            <area shape="circle" coords="337, 300, 44" href="coffee.html">
+
+        </map>
+    </section>
+</body>
+</html>
