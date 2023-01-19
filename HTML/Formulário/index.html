@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <section class="definindo form">
+        <h1>O elemento form</h1>
+        
+        <p>Um formulário HTML é usado para coletar a entrada do usuário. A entrada do usuário geralmente é enviada a um servidor para processamento.</p>
+        <p>O elemento HTML form é usado para criar um formulário HTML para entrada do usuário</p>
+        <!-- CRIAR FORMULARIO -->
+        <form>
+            .
+            form elements
+            .
+        </form>
+        <p>O elemento form é um contêiner para diferentes tipos de elementos de entrada, como: campos de texto, caixas de seleção, botões de opção, botões de envio, etc.</p>
+        <p>
+            Todos os diferentes elementos de formulário são abordados neste capítulo:
+            <a href="https://www.w3schools.com/html/html_form_elements.asp">Elementos de formulário HTML .</a>
+        </p>
+    </section>
+    <hr>
+    <section class="usando inputs">
+        <h1>O elemento input</h1>
+        <p>
+            O elemento HTML input é o elemento de formulário mais usado.
+            Um input elemento pode ser exibido de várias maneiras, dependendo do type atributo.
+            aqui estão alguns exemplos:
+        </p>
+
+        <table>
+            <tr>
+                <th>Tipos e Descrição</th>
+            </tr>
+
+            <tr>
+                <td>
+                    <code>input type="text"</code>
+                    <p>Exibe um campo de entrada de texto de linha única</p>
+                </td>
+                <td>
+                    <code>input type="radio"</code>
+                    <p>Exibe um botão de opção (para selecionar uma das muitas opções)</p>
+                </td>
+                <td>
+                    <code>input type="checkbox"</code>
+                    <p>Exibe uma caixa de seleção (para selecionar zero ou mais opções)</p>
+                </td>
+                <td>
+                    <code>input type="submit"</code>
+                    <p>Exibe um botão de envio (para enviar o formulário)</p>
+                </td>
+                <td>
+                    <code>input type="button"</code>
+                    <p>Exibe um botão clicável</p>
+                </td>
+            </tr>
+        </table>
+        <p>
+            Todos os diferentes tipos de entrada são abordados neste capítulo:
+            <a href="https://www.w3schools.com/html/html_form_input_types.asp">Tipos de entrada HTML .</a>
+        </p>
+    </section>
+    <hr>
+    <section class="labels">
+        <h1>O elemento label</h1>
+        <p>Observe o uso do elemento label no exemplo acima.</p>
+        
+        <p>A tag label define um rótulo para muitos elementos de formulário.</p>
+        
+        <p>O elemento label é útil para usuários de leitores de tela, porque o leitor de tela lerá o rótulo em voz alta quando o usuário focar no elemento de entrada.</p>
+        
+        <p>O elemento label também ajuda os usuários que têm dificuldade em clicar em regiões muito pequenas (como botões de opção ou caixas de seleção) - porque quando o usuário clica no texto dentro do elemento label, ele alterna o botão de opção/caixa de seleção.</p>
+        
+        <p>O atributo for da tag label deve ser igual ao atributo id do  elemento input para uni-los.</p>
+    </section>
+    <hr>
+    <section class="atributos de formulario">
+        <h1>O atributo de ação</h1>
+        <p>O atributo <code>action</code> define a ação a ser executada quando o formulário é enviado.</p>
+
+        <p>Normalmente, os dados do formulário são enviados para um arquivo no servidor quando o usuário clica no botão enviar.
+        Pode ser usado o target no form
+        </p>
+
+        <p><strong>Exemplo</strong></p>
+        <p>form action="/action_page.php" target="_blank"</p>
+    </section>
+    <hr>
+    <section class="metodos de formulario">
+        <h1>O atributo do método</h1>
+        <p>O atributo method especifica o método HTTP a ser usado ao enviar os dados do formulário.</p>
+
+        <p>Os dados do formulário podem ser enviados como variáveis de URL (com method="get") ou como pós-transação HTTP (com method="post").</p>
+
+        <p>O método HTTP padrão ao enviar dados de formulário é GET.</p>
+
+        <ul>
+            <h3>Observações sobre GET:</h3>
+
+            <ul>
+                <li>Anexa os dados do formulário ao URL, em pares de nome/valor</li>
+                <li>NUNCA use GET para enviar dados confidenciais! (os dados do formulário enviado são visíveis na URL!)</li>
+                <li>O comprimento de um URL é limitado (2048 caracteres)</li>
+                <li>Útil para envios de formulários em que um usuário deseja marcar o resultado como favorito</li>
+                <li>GET é bom para dados não seguros, como strings de consulta no Google</li>
+            </ul>
+
+            <h3>Observações sobre o POST:</h3>
+
+            <ul>
+                <li>Anexa os dados do formulário dentro do corpo da solicitação HTTP (os dados do formulário enviado não são mostrados na URL)</li>
+                <li>O POST não tem limitações de tamanho e pode ser usado para enviar grandes quantidades de dados.</li>
+                <li>Os envios de formulário com POST não podem ser marcados</li>
+            </ul>
+        </ul>
+    </section>
+    <hr>
+    <section class="O atributo de preenchimento automático">
+        <h1>O atributo de preenchimento automático</h1>
+        <p>O atributo autocomplete especifica se um formulário deve ter o preenchimento automático ativado ou desativado.</p>
+
+        <p>Quando o preenchimento automático está ativado, o navegador preenche automaticamente os valores com base nos valores que o usuário inseriu anteriormente.</p>
+
+        <h4>Exemplo</h4>
+        <p>Um formulário com preenchimento automático em:</p>
+
+        <code>form action="/action_page.php" autocomplete="on"</code>
+    </section>
+    <hr>
+    <section class="Atributo Novalidate">
+        <h1>O Atributo Novalidate</h1>
+        <p>O atributo <code>novalidate</code> é um atributo booleano.</p>
+
+        <p>Quando presente, especifica que os dados do formulário (input) não devem ser validados quando enviados.</p>
+
+        <p><strong>Exemplo</strong></p>
+        <p>Um formulário com um atributo novalidate:</p>
+
+        <code>form action="/action_page.php" novalidate</code>
+    </section>
+    <hr>
+    <section class="Os elementos HTML form">
+        <h1>Os elementos HTML form</h1>
+        <p>O elemento HTML form pode conter um ou mais dos seguintes elementos de formulário:</p>
+            
+        <ul>
+            <li>input</li>
+            <li>label</li>
+            <li>select</li>
+            <li>textarea</li>
+            <li>button</li>
+            <li>fieldset</li>
+            <li>legend</li>
+            <li>datalist</li>
+            <li>output</li>
+            <li>option</li>
+            <li>optgroup</li>
+        </ul>
+    </section>
+    <hr>
+    <section class="Os elementos">
+        <h1>O elemento select</h1>
+        <p>O elemento select define uma lista suspensa:</p>
+        <h4>Exemplo</h4>
+        <pre>
+            <code>
+                label for="cars">Choose a car:label <br>
+                select id="cars" name="cars"> <br>
+                    option value="volvo">Volvo/option <br>
+                    option value="saab">Saab/option <br>
+                    option value="fiat">Fiat/option <br>
+                    option value="audi">Audi/option <br>
+                /select>
+            </code>
+        </pre>
+        <p>Os elementos option definem uma opção que pode ser selecionada.</p>
+
+        <p>Por padrão, o primeiro item na lista suspensa é selecionado.</p>
+            
+        <p>Para definir uma opção pré-selecionada, adicione o atributo selected à opção:</p>
+
+        <h3>Valores Visíveis:</h3>
+        <p>Use o sizeatributo para especificar o número de valores visíveis:</p>
+
+        <h4>Exemplo</h4>
+        <pre>
+            <code>
+                label for="cars">Choose a car:/label> <br>
+                select id="cars" name="cars" size="3"> <br>
+                option value="volvo">Volvo/option> <br>
+                option value="saab">Saab/option> <br>
+                option value="fiat">Fiat/option> <br>
+                option value="audi">Audi/option> <br>
+                /select>
+            </code>
+        </pre>
+
+        <h3>Permitir seleções múltiplas:</h3>
+        Use o multipleatributo para permitir que o usuário selecione mais de um valor:
+
+        <h4>Exemplo</h4>
+        <pre>
+            <code>
+                label for="cars">Choose a car:/label> <br>
+                select id="cars" name="cars" size="4" multiple> <br>
+                option value="volvo">Volvo/option> <br>
+                option value="saab">Saab/option> <br>
+                option value="fiat">Fiat/option> <br>
+                option value="audi">Audi/option> <br>
+                /select>
+            </code>
+        </pre>
+
+        <h3>O elemento textarea</h3>
+        <p>O elemento textarea define um campo de entrada de várias linhas (uma área de texto):</p>
+        
+        <h4>Exemplo</h4>
+        <code>
+            textarea name="message" rows="10" cols="30" <br>
+            The cat was playing in the garden. <br>
+            /textarea>
+        </code>
+
+        <p>O atributo <code>rows</code> especifica o número visível de linhas em uma área de texto.</p>
+
+        <p>O atributo <code>cols</code> especifica a largura visível de uma área de texto.</p>
+
+        <h3>O elemento button</h3>
+        <p>O elemento button define um botão clicável:</p>
+        
+        <h4>Exemplo</h4>
+        <code>
+            button type="button" onclick="alert('Hello World!')"> <br>
+            Click Me! <br>
+            /button>
+        </code>
+
+        <h3>Os elementos fieldset e legend</h3>
+        <p>O elemento fieldset é usado para agrupar dados relacionados em um formulário.</p>
+        
+        <p>O elemento legend define uma legenda para o elemento fieldset.</p>
+        
+        <h4>Exemplo</h4>
+        <pre>
+            <code>
+                form action="/action_page.php"> <br>
+                fieldset> <br>
+                legend>Personalia:/legend> <br>
+                label for="fname">First name:/label><br>
+                input type="text" id="fname" name="fname" value="John"><br>
+                label for="lname">Last name:/label><br>
+                input type="text" id="lname" name="lname" value="Doe"> <br>
+                input type="submit" value="Submit"> <br>
+                /fieldset> <br>
+                /form>
+            </code>
+        </pre>
+        <br>
+        <strong>veja o code:</strong> <a href="https://www.w3schools.com/html/tryit.asp?filename=tryhtml_form_legend">aqui!</a>
+
+        <h1>O elemento datalist</h1>
+        <p>O elemento datalist especifica uma lista de opções predefinidas para um elemento input.</p>
+        
+        <p>Os usuários verão uma lista suspensa das opções predefinidas à medida que inserem os dados.</p>
+        
+        O listatributo do elemento input deve referir-se ao idatributo do elemento datalist.
+        
+        <h4>Exemplo</h4>
+        <pre>
+            <code>
+                form action="/action_page.php"> <br>
+                input list="browsers"> <br>
+                datalist id="browsers"> <br>
+                option value="Internet Explorer"> <br>
+                option value="Firefox"> <br>
+                option value="Chrome"> <br>
+                option value="Opera"> <br>
+                option value="Safari"> <br>
+                /datalist> <br>
+                /form>
+            </code>
+        </pre>
+        <br>
+        <strong>veja code:</strong> <a href="https://www.w3schools.com/html/tryit.asp?filename=tryhtml_elem_datalist" target="_blank"> aqui </a>
+
+        <h1>O elemento saída</h1>
+        <p>O elemento output representa o resultado de um cálculo (como um realizado por um script).</p>
+
+        <h4>Exemplo</h4>
+        <p>Faça um cálculo e mostre o resultado em um elemento output:</p>
+
+        <pre>
+            <code>
+                form action="/action_page.php" <br>
+                oninput="x.value=parseInt(a.value)+parseInt(b.value)"> <br>
+                0 <br>
+                input type="range"  id="a" name="a" value="50"> <br>
+                100 + <br>
+                input type="number" id="b" name="b" value="50"> <br>
+                = <br>
+                output name="x" for="a b">/output> <br>
+                input type="submit"> <br>
+                /form>
+            </code>
+        </pre>
+    </section>
+    <hr>
+    <section class="Tipos de entrada HTML">
+        <h1>Tipos de entrada HTML</h1>
+        <p>Aqui estão os diferentes tipos de entrada que você pode usar em HTML:</p>
+
+        <input type="button" value="aqui é um botão">botão <br>
+        <input type="checkbox"> caixa de check <br>
+        <input type="color"> escolha de cores<br>
+        <input type="date"> data<br>
+        <input type="datetime-local"> data e hora atual<br>
+        <input type="email"> email<br>
+        <input type="file"> <strong>"escolher arquivo no dispositivo"</strong><br>
+        <input type="hidden"> esconder input<br>
+        <input type="image"> <strong>entrada de imagem</strong><br>
+        <input type="month"> escolher mês<br>
+        <input type="number"> entrada de numero<br>
+        <input type="password"> entrada de senha<br>
+        <input type="radio"> caixa de seleção<br>
+        <input type="range"> entrada de um intervalo<br>
+        <input type="reset"> resetar algo<br>
+        <input type="search"> caixa de pesquisa<br>
+        <input type="submit"> enviar algo<br>
+        <input type="tel"> entrada de telefone<br>
+        <input type="text"> entrada de texto<br>
+        <input type="time"> cronometro<br>
+        <input type="url"> entrada de url<br>
+        <input type="week"> entrada de semana<br>
+    </section>
+    <hr>
+    <section class="Atributos de entrada HTML">
+        <h1>O atributo de valor</h1>
+    </section>
+</body>
+</html>
