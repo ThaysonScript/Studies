@@ -1,0 +1,27 @@
+entrar no terminal do vs code com o node js só digitar node no terminal e vai para ele.
+
+caso querer sair do terminal do node dentro do terminal do vs code só é digitar .exit e voltará para o terminal anterior, saindo do terminal do node.
+
+Aperte crtl + L para limpar o termial
+
+---------------------------------------------------
+
+                    TIPOS DE DADOS JS
+
+typeof()   =    Saber qual é o tipo de dado atribuido
+
+Todo tipo de numero é chamado no js por "Number"
+    dentro tem o "infinity" e o "NaN"
+
+Toda cadeia de caracteres é chamado de "Strings"
+
+Todo true ou false é chamado de "Boolean"
+
+Null
+
+Undefined
+
+object
+    dentro tem array
+
+Function

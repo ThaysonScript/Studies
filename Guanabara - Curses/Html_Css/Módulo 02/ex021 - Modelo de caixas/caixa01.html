@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelo de Caixas</title>
+    <style>
+
+        /*
+            A ordem importa, faça como um relógio: cima, direita, baixo, esquerda. Quando for fazer border, padding e margin 
+        */
+
+        h1 { /* box-level */
+            background-color: lightgray;
+
+            height: 300px;
+            width: 300px;
+
+            /* cria borda */
+            border-width: 10px;   /* comprimento da borda */
+            border-style: solid;   /* Estilo da borda */
+            border-color: darkslategray;
+            /* Simplificação da borda/shorthends */
+            /* border: 10px solid darkslategray; */
+
+
+            /* distancia do conteudo/elemento até a borda */
+            padding-top: 10px; /* distancia para cima */
+            padding-right: 10px;  /* distancia para a direita */
+            padding-bottom: 10px;  /* distancia para baixo */
+            padding-left: 10px;  /* distancia para esquerda */
+            /* 
+                padding: 10px 10px 10px 10px;
+
+                Se todos os valores forem iguais, então pode ser simplificado:    padding: 10px;
+
+                Se colocar padding: 10px 20px;
+                Vai botar os mesmos valores para baixo e esquerda.
+            */
+
+
+
+            /* distancia da borda até a parte de fora */
+            margin-top: 25px;
+            margin-right: 25px;
+            margin-bottom: 50px;
+            margin-left: 25px;
+
+            /*  shorthend
+                margin: 25px 25px 50px 25px;
+            */
+
+            /*
+                margin: auto;     =    centraliza no meio
+            */
+
+
+            /*
+            outline-width  =  fica entre a borda e a margin, só que dentro da margin
+
+            outline-width: 5px;
+            outline-style: dashed;
+            outline-color: salmon;
+
+            shorthend:
+                outline: 5px dashed salmon;
+            */
+        }
+
+        a { /* inline-level */
+
+            /*  As propriedades abaixo estão em shorthend*/
+            border: 10px solid rgb(244, 107, 107);
+
+
+            /* distancia do conteudo/elemento até a borda */
+            padding-top: 10px; /* distancia para cima */
+            padding-right: 10px;  /* distancia para a direita */
+            padding-bottom: 10px;  /* distancia para baixo */
+            padding-left: 10px;  /* distancia para esquerda */
+        }
+    </style>
+</head>
+<body>
+    <h1>Exemplo de Caixa box-level</h1>
+    <p>Parágrafos também são exemplos de box-level, mas os <a href="#">links são exemplos de caixas inline-level</a>. Vamos ver como tudo isso funciona.</p>
+</body>
+</html>
