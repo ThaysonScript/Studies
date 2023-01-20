@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabelas</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        table {
+            width: 400px;
+            height: 400px;
+
+            /* Espaço entre bordas */
+
+            /* 
+            padrão é células separadas = separate
+            juntar as células = collapse
+            */
+            border-collapse: collapse;
+            border: 2.5px solid black;
+        }
+
+        tr.linha2 {
+            background-color: lightgray;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center; /* Alinhamento Horizontal */
+
+            vertical-align: middle;  /* Alinhamento Vertical */
+        }
+
+        td.dado_b4 {
+            background-color: yellow;
+        }
+
+        td.numero {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Minha Primeira Tabela</h1>
+    <!-- Iniciar Tabela -->
+
+    <!--
+        HIERARQUIA DE TABELAS (simples)
+        TABLE = tabela
+            TABLE ROW = linha de tabela (tr)
+            TABLE HEADER = cabeçalho de tabela
+            TABLE DATA = dado de tabela (td)
+    -->
+
+    <table>
+        <tr>        <!-- primeira linha de tabela-->
+            <td>A1</td>     <!-- Primeiro dado de tabela -->
+            <td>B1</td>     <!-- segundo dado de tabela -->
+            <td>C1</td>     <!-- terceiro dado de tabela -->
+        </tr>
+
+        <tr class="linha2">        <!-- segunda linha de tabela-->
+            <td>A2</td>     <!-- Primeiro dado de tabela -->
+            <td>B2</td>     <!-- segundo dado de tabela -->
+            <td class="numero">C2</td>     <!-- terceiro dado de tabela -->
+        </tr>
+
+        <tr>        <!-- terceira linha de tabela-->
+            <td>A3</td>     <!-- Primeiro dado de tabela -->
+            <td>B3</td>     <!-- segundo dado de tabela -->
+            <td class="numero">C3</td>     <!-- terceiro dado de tabela -->
+        </tr>
+
+        <tr>        <!-- quarta linha de tabela-->
+            <td>A4</td>     <!-- Primeiro dado de tabela -->
+            <td class="dado_b4">B4</td>     <!-- segundo dado de tabela -->
+            <td>C4</td>     <!-- terceiro dado de tabela -->
+        </tr>
+    </table>
+</body>
+</html>
