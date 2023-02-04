@@ -53,6 +53,14 @@ Operadores de incremento:
 +=  INCREMENTAR UM VALOR A VARIAVEL
 -=  DECREMENTAR UM VALOR A VARIAVEL
 
+POS INCREMENTO:
+    n++     pos incremento
+    primeiro mostra o valor de n e depois incrementa o valor
+
+PRE INCREMENTO:
+    ++n     PRE INCREMENTO
+    primeiro incrementa o valor em n e depois mostra o valor de n ja incrementado
+
 */
 console.log("n1: " + n1)
 
