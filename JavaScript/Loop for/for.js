@@ -8,3 +8,5 @@ for(inicio = 0; inicio <= fim; inicio++) {
     //iteracao quantas vezes vai ser execultado
     console.log(`O numero ${inicio} vai atingir o ${fim} em ${inicio}`)
 }
+
+//  ITERACAO == REPETICAO LOOPING
