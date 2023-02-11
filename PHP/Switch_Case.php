@@ -45,6 +45,23 @@
             para usar dentro do html insira-o em uma tag html com a sintaxe <?=   ?>
         */
 
+
+
+    //OPERADOR MATCH:
+    $x = 10;
+    echo match($x) {
+        5 => 'parou no 5',
+        10 => 'parou no 10',
+        15 => 'parou no 15',
+        default => 'é um numero diferente de 5, 10, 15'
+    }
+
+    //Podemos associar o mach a uma variavel:
+    $valor = match($x) {
+
+    };
+    echo $valor;
+
 ?>
 
 <!DOCTYPE html>
