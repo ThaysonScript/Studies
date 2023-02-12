@@ -91,4 +91,88 @@
         falar();    #aparecerá o valor da variavel falando, ou seja, Estou falando algo pois foi usado o return para retornar a variavel para a chamada da funcao
 
 
+
+    //ESCOPO DE VARIAVEIS:
+        #No caso de parametros de funcao, o parametro so existe dentro da funcao, externamente ela nao pode ser usada
+
+        # Se criar uma variavel dentro de uma funcao, somente lá que ela sera usada
+
+        # se criar uma variavel fora de uma funcao e definir o seu valor, mesmo que vc tente trocar o valor da variavel dentro de uma funcao, ela nao sera alterada
+        
+        # Para isso temos o global:
+        #vc vai poder trocar o valor da variavel global dentro de uma funcao:
+        $a = 10;
+
+        function troc() {
+            global $a;
+            $a = 20;
+        }
+        troc();
+
+        echo "<p>$a</p>";
+
+        # Tem um metodo melhor para ser trocado o valor de uma variavel dentro de uma funcao:
+        $b = 100;
+
+        function funcao2() {
+            $GLOBALS['b'] = 200;    # Define como um array e transforma a variavel como global
+        }
+        funcao2();
+
+        echo "<p>$b</p>";
+
+
+    
+    //FUNCOES ANONIMAS:
+        $func = function() {
+            echo "Aqui é uma funcao anonima que se deve usar um ponto e virgula como ao inicializar uma variavel com qualquer valor";
+        };  # deve-se usar o ponto e virgula em funcoes anonimas php
+
+        $func();    # chamada da funcao anonima
+
+
+        //Com parametro:
+        $falar = function($valor) {
+            echo "eu estou $valor";
+        };
+        $falar("falando isso...");
+
+
+        //Com parametro e retorno:
+        $falar = function($valor) {
+            return "eu estou $valor";
+        };
+        echo $falar("falando isso...");
+
+
+        //Funcao que é executada em outra funcao
+        $func1 = function($valor1) {
+            return "uma string: $valor1";
+
+        };
+
+        function falar2($func1) {
+            echo $func1;
+        };
+
+        falar2($func1());
+
+
+
+
+    //FUNCOES CLOSURE E ARROW FUNCTION:
+        #funcoes normais que podem pegar variaveis globais para serem usadas dentro do seu escopo:
+
+        #global variaveis
+        $x = 20;
+        $y = 30;
+
+        #funcao anonima
+        //variavel          funcao(param)  uso de variavel globais
+        $myclosureFunction = function($z) use($x, $y) {
+            echo "$z - $x - $z";
+            $y += 1000; #mesmo se alterar a global, isso só serve para o escopo da funcao
+        };
+
+
 ?>
