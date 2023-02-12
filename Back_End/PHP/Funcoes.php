@@ -171,8 +171,38 @@
         //variavel          funcao(param)  uso de variavel globais
         $myclosureFunction = function($z) use($x, $y) {
             echo "$z - $x - $z";
-            $y += 1000; #mesmo se alterar a global, isso só serve para o escopo da funcao
+            $y += 1000; #mesmo se alterar a global, isso só serve para o escopo da funcao, fora da funcao o escopo usado e referenciado é o global
         };
+
+
+        //ARROW FUNCTIONS:  por padrao pega valores globais para si, nao precisa de return nem chaves
+            #definicao:
+            $x1 = 20;
+            $y1 = 30;
+            $z1 = 10;
+
+            # var   arrow function      args
+            $funcao1 = fn($a) => "$x1 - $y1 - $z1";
+
+            echo $funcao1(10);
+
+
+
+    //FUNCOES GERADORAS:
+        #definicao
+        $a = 0;
+        $b = 1;
+        $c = 2;
+
+        function buscarNumero() {
+            yield $a;
+            yield $b;
+            yield $c;
+            yield 'carlos';
+            yield 'rodrigo';
+            yield 'jose';
+            yield from ['carlos', 'rodrigo', 'jose'];
+        }
 
 
 ?>
