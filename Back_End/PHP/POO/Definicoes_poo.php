@@ -28,17 +28,17 @@
 
     //criar nova instancia da classe/clonar esqueleto
     $apple = new Fruit();
-    $apple->set_name('Apple');
+    $apple -> set_name('Apple');
     $apple -> set_color('Red');
 
     $banana = new Fruit();
-    $banana->set_name('Banana');
+    $banana -> set_name('Banana');
     $banana -> set_color("Yellow");
 
-    echo $apple->get_name();
-    echo $apple->get_color();
+    echo $apple -> get_name();
+    echo $apple -> get_color();
     echo "<br>";
-    echo $banana->get_name();
-    echo $banana->get_color();
+    echo $banana -> get_name();
+    echo $banana -> get_color();
 
 ?>
