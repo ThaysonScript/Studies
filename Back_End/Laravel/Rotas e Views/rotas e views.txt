@@ -1,0 +1,37 @@
+ROTAS:
+    São usadas para acessar as paginas do projeto (acessar as partes do nosso projeto)
+    Por meio de Urls
+
+    Tem a responsabilidade de saber qual o action/controller que esta acessando a rota/pagina (qual o metodo que vai ta disparando) controlando o fluxo da aplicacao
+
+VIEWS:
+    entrega um html (representacoes graficas)
+
+    TEMPLATE (BLADE):
+        estruturação da pagina por meio do html
+
+    DADOS DINAMICOS:
+        Os templates podem renderizar os dados de um banco de dados por meio do html
+
+
+ACESSO:
+    ROTAS:
+        routes/web.php
+
+    VIEWS:
+        resources/views/welcome.blade.php
+
+CRIACAO DE PAGINA:
+    crie um novo documento blade na parte de views
+
+    adicione o mesmo nome de arquivo view criado no web.php com a estrutura:
+
+        Route::get('/exemplo de arquivo view criado', function () {
+            return view('exemplo de arquivo view criado');
+        });
+
+    isso retornará uma página html
+
+    Podemos tambem criar uma view que retorna outra view, como o exemplo da view de produtos que retorna a view contact
+
+    
