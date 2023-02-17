@@ -1,0 +1,19 @@
+CONHECENDO O BLADE:
+    tambem conhecido como a template engine do laravel
+    É por meio desse motor que o blade é capaz de pegar dados do controller de um banco de dados e associá-los a uma view tornando-as views dinâmicas
+
+    Blade faz html puro no laravel
+
+    views serão renderizadas e de responsabilidade do blade
+
+    o Blade tem suporte a toda linguagem de programacao php
+    suporta if, else, for ... etc
+
+    INSERINDO DADOS/VARIAVEIS/DIRETIVAS EM VIEWS BLADE:
+        Exemplo no route home da pagina:
+            Route::get('/', function () {
+
+                $nome = 'Thayson';
+
+                return view('welcome', ['nome' => $nome]);
+            });
