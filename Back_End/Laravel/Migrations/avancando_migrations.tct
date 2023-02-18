@@ -1,0 +1,13 @@
+AVANÇANDO EM MIGRATIONS:
+    Quando precisarmos adicionar um novo campo a uma tabela devemos criar uma nova migration
+
+    Não podemos dar o comando migrate:fresh por que ele irá apagar os dados existentes para poder rodar a migration novamente
+
+    Utilize o comando rollback para voltar uma migration (tirar uma migration do database)
+
+    Volte todas as migrations usando o comando reset (tirar todas as migrations do database)
+    
+    Volte todas as migrations e rode elas novamente usando o refresh (tirar todas as migrations do database e coloca-las novamente)
+
+ADICIONANDO NOVAS MIGRATIONS PARA TABLES:
+    php artisan make:migration add_category_to_nome da tabela

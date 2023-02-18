@@ -1,0 +1,26 @@
+MIGRATIONS:
+    Funcionam como um versionamento de banco de dados
+
+    Podemos avançar e voltar quando  quiser
+
+    Adicionar colunas e remover de forma facilitada
+
+    Fazer o setup de DB de uma nova instalacao em apenas um comando
+
+    Podemos verificar as migrations com migrate:status
+
+CRIAR NOVO ARQUIVO DE BANCO DE DADOS:
+    vá no arquivo .env e altere o db_database para o banco que vc criou no phpmyadmin
+
+    php artisan migrate     -   enviar dados para o database
+
+    php artisan migrate:fresh       -       atualizar e ao mesmo tempo enviar as alteracoes para o database
+
+    php artisan make:migration nome_banco_dados    -   cria um novo arquivo database
+
+    php artisan migrate:status      -       viisualizar o status do banco
+
+
+METODOS:
+    DELETAR TABELAS:
+        $table -> string('name')
