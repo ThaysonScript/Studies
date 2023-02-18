@@ -1,0 +1,17 @@
+ELOQUENT:
+    Eloquent é a ORM do Laravel     -   abstracao das querys do database, como FROM, SELECT do mysql
+
+    Cada tabela tem um Model que é responsavel pela interacao entre as requisicoes ao banco
+
+    A convencao para o Model é o nome da entidade em singular e maiusculo, enquanto a tabela é a entidade no plural e minusculo: Event e events
+
+    No Model faremos poucas alteracoes dos arquivos, geralmente configuracoes especificas
+
+CRIAR NOVOS MODELS:
+    vá em terminal      php artisan make:model Event
+    vai criar um novo modelo de Model na pasta app/Models
+
+
+
+EDITANDO TABELAS NO DATABASE:
+    vá na table que quer editar a table e click em insert para inserir informacoes, insira e click em continuar ou go

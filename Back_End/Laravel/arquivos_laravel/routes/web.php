@@ -13,23 +13,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*
+    Route::get('/', function () {
     return view('welcome');
-});
+    });
+
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+
+    Route::get('/product', function () {
+        return view('contact');
+    });
+
+*/
+
+//ISSO TUDO ABAIXO NAO COMENTADO VAI RETORNAR COMO HTML AS INFORMACOES CRIADAS NO DATABASE
+
+use App\Http\Controllers\EventController; #importando o controller
+
+#dps de testar o models, altere para /estrutura_php_blade
+Route::get('/', [EventController::Class, 'index']); #essa rota foi passada para o controller, para a index
+
+Route::get('/events/create', [EventController::Class, 'create']);
 
 Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/product', function () {
-    return view('contact');
-});
-
-
-use App\Http\Controllers\EventController; #importando o controller
-Route::get('/estrutura_php_blade', [EventController::Class, 'index']); #essa rota foi passada para o controller, para a index
-
-Route::get('/events/create', [EventController::Class, 'create']);
+/*
 
 Route::get('/product', function () {
 
