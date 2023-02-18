@@ -2,6 +2,21 @@
     font-family: 'Roboto', sans-serif;
 }
 
+header {
+    height: 50px;
+}
+
+li.nav-item {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+li.nav-item > a {
+    text-decoration: none;
+
+    color: rgb(0, 0, 0);
+}
+
 #navbar img {
     width: 50px;
 }

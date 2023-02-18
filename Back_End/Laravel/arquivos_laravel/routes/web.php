@@ -25,23 +25,11 @@ Route::get('/product', function () {
     return view('contact');
 });
 
-Route::get('/estrutura_php_blade', function () {
 
-    # Usando variaveis e dados para serem usados no blade (view):
-    $nome = 'Thayson';
-    $idade = 20;
-    $array = [1, 2, 3, 4, 5];
-    $nomes = ['maria', 'joao', 'jose', 'carlos', 'eduardo', 'saulo'];
+use App\Http\Controllers\EventController; #importando o controller
+Route::get('/estrutura_php_blade', [EventController::Class, 'index']); #essa rota foi passada para o controller, para a index
 
-    return view('estrutura_php_blade',
-    [
-        'nome' => $nome,
-        'idade' => $idade,
-        'profiss' => "programador",
-        'array' => $array,
-        'nomes' => $nomes
-    ]);
-});
+Route::get('/events/create', [EventController::Class, 'create']);
 
 Route::get('/product', function () {
 
