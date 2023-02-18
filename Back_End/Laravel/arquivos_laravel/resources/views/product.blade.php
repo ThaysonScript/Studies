@@ -9,4 +9,14 @@
 
 <a href="/contact">Deseja visualizar contact?</a>
 
+<br>
+
+<a href="/product2">Deseja visualizar o produto 2?</a>
+
+@if($busca != '')
+
+    <p>O usuario esta procurando por: {{ $busca }}</p>
+
+@endif
+
 @endsection

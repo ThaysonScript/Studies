@@ -22,7 +22,7 @@ Route::get('/contact', function () {
 });
 
 Route::get('/product', function () {
-    return view('product');
+    return view('contact');
 });
 
 Route::get('/estrutura_php_blade', function () {
@@ -41,6 +41,19 @@ Route::get('/estrutura_php_blade', function () {
         'array' => $array,
         'nomes' => $nomes
     ]);
+});
+
+Route::get('/product', function () {
+
+    $busca = request('search');
+
+    return view('product',['busca' => $busca]);
+});
+
+#parametros de rotas
+Route::get('/product2/{id?}', function ($id = null) {
+
+    return view('product2', ['id' => $id]);
 });
 
 /*  AQUI FICA EXEMPLO DE ARQUIVO VIEW QUE RETORNA OUTRA VIEW DE OUTRO ARQUIVO
