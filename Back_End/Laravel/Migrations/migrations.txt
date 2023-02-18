@@ -1,0 +1,10 @@
+MIGRATIONS:
+    Funcionam como um versionamento de banco de dados
+
+    Podemos avançar e voltar quando  quiser
+
+    Adicionar colunas e remover de forma facilitada
+
+    Fazer o setup de DB de uma nova instalacao em apenas um comando
+
+    Podemos verificar as migrations com migrate:status
