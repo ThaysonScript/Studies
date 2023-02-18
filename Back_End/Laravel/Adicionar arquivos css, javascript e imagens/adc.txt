@@ -1,0 +1,2 @@
+ADICIONANDO ARQUIVOS ESTATICOS:
+    Todos os recursos css, javascrript e imagens ficam na pasta public do laravel

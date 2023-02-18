@@ -30,8 +30,17 @@ Route::get('/estrutura_php_blade', function () {
     # Usando variaveis e dados para serem usados no blade (view):
     $nome = 'Thayson';
     $idade = 20;
+    $array = [1, 2, 3, 4, 5];
+    $nomes = ['maria', 'joao', 'jose', 'carlos', 'eduardo', 'saulo'];
 
-    return view('estrutura_php_blade', ['nome' => $nome, 'idade' => $idade, 'profiss' => "programador"]);
+    return view('estrutura_php_blade',
+    [
+        'nome' => $nome,
+        'idade' => $idade,
+        'profiss' => "programador",
+        'array' => $array,
+        'nomes' => $nomes
+    ]);
 });
 
 /*  AQUI FICA EXEMPLO DE ARQUIVO VIEW QUE RETORNA OUTRA VIEW DE OUTRO ARQUIVO

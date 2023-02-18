@@ -1,0 +1,17 @@
+LAYOUTS COM BLADE:
+    A funcionalidade de criar um layout permite o reaproveitamento de codigo
+
+    pode-se usar o mesmo header body e footer, muito mais... em todas as paginas do blade/html sem repetir codigo
+
+    podemos criar seções do site por meio do layout e tambem mudar o title da pagina
+
+    USE:
+        @extends    -   para usar um modelo html já pronto(veja main.blade.php)
+
+        @section('o conteudo que voce quer que pegue', 'mudar conteudo de dentro')      -       vai criar uma seção para ser usada em um modelo html já pronto, caso o seu @section não seja title coloque o @endsection para indicar o fim da seção
+
+
+        YIELD:
+            Usado para referenciar o conteudo que vai ser retornado
+
+            ao retornar o conteudo para o yield exemplo yield('content') o conteudo colocado no component @section('content') sera atribuido ao yield e vizualizado no html
