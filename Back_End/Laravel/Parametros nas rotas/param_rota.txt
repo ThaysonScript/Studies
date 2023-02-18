@@ -1,0 +1,8 @@
+PARAMETROS NAS ROTAS/ROUTES:
+    pode-se mudar como uma view nos responde adicionando parametros as rotas
+
+    ao definir a rota devemos colocar o parametro desta maneira: {id};
+
+    podemos ter parametros opcionais tambem adicionando uma ? apos o id
+
+    Laravel tambem aceita o query parameters(parametros de url), usando a sintaxe: ?nome=Thayson&idade=20
