@@ -1,0 +1,24 @@
+CONTROLLERS:
+    Os controllers são parte fundamental de toda a aplicação em laravel
+
+    geralmente tudo será feito por controllers (condensam a maior parte da logica)
+
+    Tem o papel de enviar e esperar resposta do banco de dados
+
+    Tem tambem receber e enviar alguma resposta para as views
+
+    Podem ser criados via artisan
+
+    É comun retornar uma view ou redirecionar para uma URL pelo Controller
+
+    Controllers tem actions que são os metodos passados para o controller para enviar ou receber dados
+
+CRIANDO CONTROLLERS:
+    use terminal:
+        php artisan make:controller EventController
+
+    isso criará um arquivo dentro do app/http/controller
+
+USANDO O CONTROLLERS:
+    faça nesse controller uma public function:
+        essa será onde vai ficar sua pagina inicial, chame-a de index

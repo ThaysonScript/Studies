@@ -1,0 +1,15 @@
+CONEXAO COM BANCO DE DADOS:
+    A conexao do laravel com o banco é configurada pelo arquivo .env
+
+    Relaciona maior liberdade e seguranca
+
+    Laravel ultiliza um ORM (object-relacional mapping) chamada Eloquent
+
+    Criacao de tabelas com os Migrations
+
+COMO CRIAR O BANCO DE DADOS:
+    vá no xampp e ligue o apache e mysql, no mysql click em admin, na pagina que abrir crie um novo banco com o botao (novo) coloque nome e click em criar
+
+    na pasta do seu arquivo laravel vá no terminal e faça um php artisan migrate e click em yes ou configure seu arquivo .env
+
+    seu banco de dados sera criado em database/migrations

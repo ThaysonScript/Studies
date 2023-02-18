@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{-- O TITULO EXTENDIDO SERA RETORNADO E PARARA NO YIELD ABAIXO --}}
+    <title>@yield('title')</title>
+
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,10 +18,6 @@
 
     <!-- APLICACAO CSS -->
     <link rel="stylesheet" href="css/style.css">
-
-    {{-- O TITULO EXTENDIDO SERA RETORNADO E PARARA NO YIELD ABAIXO --}}
-    <title>@yield('title')
-    </title>
 </head>
 <body>
     <header>
@@ -29,7 +29,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="/" class="nav-link">Eventos</a>
-                        <a href="/" class="nav-link">Criar Eventos</a>
+                        <a href="/events/create" class="nav-link">Criar Eventos</a>
                         <a href="/" class="nav-link">Entrar</a>
                         <a href="/" class="nav-link">Cadastrar</a>
                     </li>
@@ -37,10 +37,16 @@
             </div>
         </nav>
     </header>
+
     {{-- CONTEUDO EXTENDIDO SERA RETORNADO E PARARA NO YIELD ABAIXO --}}
     @yield('content')
+
     <footer>
         <p>HDC Events &copy; 2020</p>
     </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>
