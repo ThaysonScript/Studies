@@ -3,39 +3,65 @@
     Aqui será um arquivo exemplo do suporte a linguagem php no blade da view
     if, else, while ... etc
 
+    Tambem sera usado o exemplo de layouts blade
+
 -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrutura php no blade</title>
-</head>
-<body>
-    <h1>Algum Título</h1>
+@extends('layouts.main')
 
-    <!-- Exemplo de estrutura condicional simples no blade -->
-    @if(10 > 5)
-        <p>"10 é maior que 5"</p>
-    @endif
+@section('title', 'HDC Events')
 
-    <!-- Usando os dados criados na route (use o $/chave sempre) -->
-    <p>{{ $nome }}</p>
 
-    <!-- Exemplo de estrutura condicional completa no blade -->
-    @if($nome == 'Thayson')
-        <p>O nome passado foi: {{$nome}} e ele tem {{$idade}} anos e a profissão é: {{$profiss}}</p>
+@section('content')
+<h1>Algum Título</h1>
 
-    @elseif($nome == 'Arnaldo')
-        <p>O nome passado não foi Thayson, mas sim o nome: {{$nome}}</p>
+<!-- USANDO A IMG DA PASTA PUBLIC -->
+<img src="/img/atual-eventos-banner.jpg" alt="Banner">
+<!-- Exemplo de estrutura condicional simples no blade -->
+@if(10 > 5)
+    <p>"10 é maior que 5"</p>
+@endif
 
-    @else
-        <p>Não foi passado nenhum nome ou nome inválido</p>
+<!-- Usando os dados criados na route (use o $/chave sempre) -->
+<p>{{ $nome }}</p>
 
-    @endif
+<!-- Exemplo de estrutura condicional completa no blade -->
+@if($nome == 'Thayson')
+    <p>O nome passado foi: {{$nome}} e ele tem {{$idade}} anos e a profissão é: {{$profiss}}</p>
 
-    <a href="/">voltar para home</a>
-</body>
-</html>
+@elseif($nome == 'Arnaldo')
+    <p>O nome passado não foi Thayson, mas sim o nome: {{$nome}}</p>
+
+@else
+    <p>Não foi passado nenhum nome ou nome inválido</p>
+
+@endif
+
+<!-- Exemplo de estrutura de repetição for no blade -->
+@for($i = 0; $i < count($array); $i++)
+    <p>{{ $array[$i] }} - {{ $i }}</p>
+@endfor
+
+<!-- Exemplo de estrutura de repetição for no blade -->
+@foreach($nomes as $nomes)
+
+    {{-- pegando indices do foreach --}}
+    <p>{{ $loop -> index }}</p>
+    <p>{{ $nomes }}</p>
+@endforeach
+
+<!-- Insere codigo php no blade -->
+@php
+
+    $nome = 'joao';
+    echo $nome;
+    echo '<br>';
+
+@endphp
+
+<!-- ESSE TIPO DE COMENTARIO É INSERIDO NO DEV TOOLS -->
+{{-- ESTE É UM COMENTARIO DO BLADE E NÃO É INSERIDO NO DEV TOOLS --}}
+
+<a href="/">voltar para home</a>
+
+@endsection
