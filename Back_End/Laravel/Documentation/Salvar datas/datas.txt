@@ -1,0 +1,31 @@
+SALVANDO DATAS NO DATABASE:
+    Para salvar datas no laravel é muito fácil, precisamos criar um input do tipo date na nossa view;
+
+    Um campo de dateTime via migrations;
+
+    E processar o envio dos dados via Controller pelo request de POST
+
+
+
+CRIACAO:
+    adicione uma nova migration:
+        php artisan make:migration add_date_to_events_table
+
+    adicione no up da migration:
+        $table -> dateTime('date');
+
+    adicione no down da migration:
+        $table -> dropColumn('date');
+
+    reset todo o banco de dados para iniciar o database do zero:
+        php artisan migrate:fresh
+
+    adicione um tipo de dados ao Controller event:
+        protected $dates = ['date'];
+
+    adicione na funcao store do Controller para linkar os valores de data passados pelo usuario:
+        $event -> date = $request -> date;
+
+
+    entao por utimo formate as datas para o banco de dados na view:
+        <p> {{ date('d/m/y', strtotime($event -> date)) }} </p>
