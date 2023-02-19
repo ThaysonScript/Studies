@@ -41,4 +41,46 @@ class EventController extends Controller
     public function create() {
         return view('events.create');
     }
+
+    public function store(Request $request) {
+
+        #nova instancia de Event
+        $event = new Event;
+
+        $event -> title = $request -> title;
+        $event -> city = $request -> city;
+        $event -> private = $request -> private;
+        $event -> description = $request -> description;
+
+        //IMAGE UPLOAD
+        if($request -> hasfile('image') && $request -> file('image') -> isValid()) {
+
+            $requestImage = $request -> image;
+
+            $extension = $requestImage -> extension();
+
+            #vai pro database
+            $imageName = md5($requestImage -> getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $request -> image -> move(public_path("img/events", $imageName));
+
+            # salvando no database
+            $event -> image = $imageName;
+    }
+
+        #SALVE TODOS OS DADOS PASSADOS NO DATABASE:
+        $event -> save();
+
+        #caso queira redirecionar o usuario para uma pagina e mostrar algo a mais na tela com o with:
+        return redirect('/') -> with('msg', 'Evento criado com sucesso');
+
+    }
+
+    public function show($id) {
+
+        $event = Event::findOrFail($id);
+
+        return view('events.show', ['event' => $event]);
+
+    }
 }

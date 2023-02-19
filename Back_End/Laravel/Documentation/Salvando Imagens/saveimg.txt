@@ -1,0 +1,45 @@
+SALVANDO IMAGENS NO LARAVEL:
+    Para fazer o upload precisammos mudar o ENCTYPE do form e tambem CRIAR UM IPUT de envio delas;
+
+    No Controller vamos fazer um TRATAMENTO DE VERIFICACAO DA IMAGEM que foi enviada;
+
+    E depois vamos salvar ela com um NOME UNICO em um diretorio do projeto;
+
+    No banco de dados salvamos apenas o PATH para a imagem
+
+
+    VÁ PARA O FORM E ADICIONE O ENCTYPE:
+        <form action="/events" method="POST" enctype="multipar/form-data">
+        @csrf
+        
+        label for="image"
+        input type="file" name="image"
+
+        </form>
+
+        CRIE UMA NOVA MIGRATION PARA AS IMAGEMS:
+            php artisan make:migration add_image_to_events_table
+
+            adicione o $table -> string('image'); na funcao up()
+
+            e retire quando deletado na funcao down com: $table -> dropColumn('image');
+
+            publique o dado no database com o php artisan migrate
+
+        VÁ NO Controller NA PARTE DO STORE E ADICIONE:
+            if($request -> hasfile('image') && $request -> file('image') -> isValid()) {
+
+                    $requestImage = $request -> image;
+
+                    $extension = $requestImage -> extension();
+
+                    #vai pro database
+                    $imageName = md5($requestImage -> getClientOriginalName() . strtotime("now)) . "." . $extension;
+
+                    $request -> image -> move(public_path("img/events", $imageName));
+
+                    # salvando no database
+                    $event -> image = $imageName;
+            }
+
+            $event -> save(); # salvando por completo

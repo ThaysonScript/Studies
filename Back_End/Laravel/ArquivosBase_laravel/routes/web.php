@@ -37,9 +37,9 @@ Route::get('/', [EventController::Class, 'index']); #essa rota foi passada para 
 
 Route::get('/events/create', [EventController::Class, 'create']);
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/events', [EventController::Class, 'store', /*joga todos os dados para ca do database*/]);
+
+Route::get('/events/{$id}', [EventController::Class, 'show']);
 
 /*
 
