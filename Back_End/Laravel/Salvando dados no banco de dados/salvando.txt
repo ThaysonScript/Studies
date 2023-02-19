@@ -1,0 +1,51 @@
+ADICIONANDO REGISTRO AO BANCO DE DADOS (SALVANDO DADOS):
+    No laravel é commum ter uma action especifica para o post chamada de STORE
+
+    Lá iremos criar o objeto e compor ele com base nos dados enviados pelo POST
+
+    Com o objeto formado utilizamos o metodo SAVE para persistir os dados
+
+
+    crie um form e edite-o no create.blade.php
+
+    EXEMPLO:
+        <form action="/rota, adicione a rota /events" method="POST, para resgatar dados (pegar dados passados pelo form)">
+
+            ADICIONE A PROPRIEDADE DO LARAVEL PARA MANDAR DADOS PARA O DATABASE PELO FORM:
+            @csrf
+
+            div form group
+            label for title
+            input type text class form-control id title name title placeholder nome do evento
+
+            copie o form group para cada tipo de evento que vc criar na aplicaco
+
+            caso tiver evento privado adicione a tag select name private id private class form-control com option value 0 para nao, option value 1 para sim
+
+            em descricao use textarea placeholder = "o que vai acontecer?"
+
+            por utimo crie um input type submit
+
+        </form>
+
+ADICIONE A ROTA PARA REGISTRAR O EVENTO NO CONTROLLER E DELE PARA VIEW:
+    Route::get('/events', [EventController::Class, 'store', joga todos os dados para ca do database']);
+
+    CRIE UMA NOVA FUNCAO NO CONTROLLER PARA PEGAR ESSES DADOS DO FORM:
+        public function store(Request $request) {
+
+            crie uma nova instancia do Event (App\Models\Event):
+            $event = new Event;
+
+            $event -> title = $request -> title;
+            $event -> city = $request -> city;
+            $event -> private = $request -> private;
+            $event -> description = $request -> description;
+
+            SALVE TODOS OS DADOS PASSADOS NO DATABASE:
+            $event -> save();
+
+            caso queira redirecionar o usuario para uma pagina:
+            return redirect('/');
+
+        }
