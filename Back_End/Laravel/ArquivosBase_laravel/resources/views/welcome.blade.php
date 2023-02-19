@@ -17,6 +17,12 @@
 
         <p>{{ $event->title }} -- {{ $event->description }}</p>    {{-- pegue o valor de title e description --}}
 
+        {{-- adicionado no video #17 --}}
+        <img src="/img/events/{{ $event -> image }}" alt="{{ $event -> title }}">
+
+        {{-- adicionado no video #18 --}}
+        <a href="/events/{{ $event -> id }}">Saber Mais</a>
+
     @endforeach
 
 @endsection

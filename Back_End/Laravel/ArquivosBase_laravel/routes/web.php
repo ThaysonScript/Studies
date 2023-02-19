@@ -37,9 +37,9 @@ Route::get('/', [EventController::Class, 'index']); #essa rota foi passada para 
 
 Route::get('/events/create', [EventController::Class, 'create']);
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/events', [EventController::Class, 'store', /*joga todos os dados para ca do database*/]);
+
+Route::get('/events/{$id}', [EventController::Class, 'show']);
 
 /*
 
@@ -63,3 +63,13 @@ Route::get('/product', function () {
 });
 
 */
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

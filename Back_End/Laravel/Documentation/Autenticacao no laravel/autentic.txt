@@ -1,0 +1,58 @@
+AUTENTICACAO NO LARAVEL:
+    Podemos utilizar o Jetstream para aplicar uma autenticacao de modo rappido no nosso sistema;
+
+    Primeiramente instalamos o pacote via Composer;
+
+    Depois instalamos o Livewire, que sao componentes de autenticacao para o blade;
+
+    E por fim rodamos as migrations
+
+
+CRIACAO:
+    vá em terminal e digite:
+        composer require laravel/jetstream  -   isso instalara o jetstream
+
+    instale o livewire:
+        php artisan jetstream:install livewire
+
+    instale o npm com: "npm install" e de um" npm run dev" para rodar o npm. tudo isso instalara os assets do seu projeto
+
+    vá na view do seu layout e adicione um link para a autenticacao:
+        login e register
+
+    na mesma view use o @guest e @endguest para quando se registrar nao dar como nao registrado (ira desaparecer o login e o register):
+
+        @guest
+
+            <a></a>
+
+        @endguest
+
+    adicione autenticacao a view, para quando tiver autenticado (coloque @auth e @endauth):
+
+        @auth
+
+            li
+                a href /dashboard
+            li
+
+            li
+                form action /logout method POST
+
+                @csrf
+
+                    #crie um evento javascript para autenticar o form:
+                        a href /logout onclick="event.preventDefault(); this.closest('form').submit();"
+
+                        a
+
+                form
+            li
+
+        @endauth
+
+        @guest
+
+            <a></a>
+
+        @endguest

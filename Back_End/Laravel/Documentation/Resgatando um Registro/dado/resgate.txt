@@ -1,0 +1,22 @@
+RESGATANDO UM REGISTRO:
+    Vamos fazer a view do evento nesta aula;
+
+    E com isso aprender a resgatar APENAS UM REGISTRO pelo eloquent
+
+    Vamos utilizar o metodo findOrFail;  #verifica no banco se tem um id
+
+    E tambem criar uma nova view e rota para esta funcao;
+
+    Esta tela tem a funcao de exibir todas as informacoes do evento e tambem o botao de participar
+
+
+ADICIONAMENTO:
+    crie uma nova rota no web.php:
+        Route::get('/events/{$id}', [EventController::Class, 'show']);
+
+    crie isso no welcome.blade:
+        {{-- adicionado no video #18 --}}
+        <a href="/events/{{ $event -> id }}">Saber Mais</a>
+
+    vá em controller e crie um novo evento/funcao show:
+        
