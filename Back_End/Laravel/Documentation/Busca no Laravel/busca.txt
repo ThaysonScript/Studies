@@ -1,0 +1,34 @@
+BUSCA NO LARAVEL:
+    Para criar uma busca no laravel é muito simples, vamos utilizar o Eloquent;
+
+    O metodo where vai identificar os registros que precisamos, fazendo um filtro e nos enviando para a view;
+
+    Podemos fazer a exibicao da busca na propria home, mudando o layout com diretivas do blade
+
+
+CRIACAO:
+    crie um form em uma view e adicione o method get:
+        <form action="/" method="GET">
+        
+            input type="text" id="search" name="search"
+        
+        </form>
+
+    no event controller adicione na funcao home da pagina:
+
+    public function index() {
+
+        $search = request('search);
+
+        if($search) {
+            $event = Event::where([
+                ['title', 'like', '%' . $search . '%']
+            ]) -> get();    #pegar os valores passados
+        } else {
+            $event= Event::all();
+        }
+
+        return view('welcome', ['events' => $events, 'search' => $search]);
+
+
+    }
