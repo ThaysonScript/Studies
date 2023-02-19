@@ -1,0 +1,25 @@
+FLASH MESSAGES:
+    Podemos adicionar mensagens ao usuario por SESSION;
+
+    Estas mensagens sao conhecidas por FLASH MESSAGES;
+
+    Podemos adicionar com o metodo WITH nos Controllers;
+
+    Utilizadas para apresentar um feedback ao usuario;
+
+    No blade podemos verificar a presença da mensagem pela diretiva @SESSION;
+
+CRIACAO:
+    faça na funcao store:
+        na parte do return redirect():
+            use apos o redirect():
+                -> with('o que vai ser visto');
+
+    Depois na view de layout verifique se o evento aconteceu com:
+
+        use a session('parametro')
+
+        @if(session('msg'))
+
+            <p class="msg">{{ session('msg') }}</p>
+        @endif
