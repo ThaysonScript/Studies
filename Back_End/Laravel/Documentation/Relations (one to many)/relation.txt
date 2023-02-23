@@ -1,0 +1,19 @@
+RELATIONS (ONE TO MANY):
+    Relacao sao essenciais para sistemas de banco de dados relacionais;
+
+    Vamos criar uma relacao de um para muitos, entre usuario e eventos;
+
+    Isso tornara um usuario dono de um evento, e tambem a possibilidade dele possuir varios;
+
+    Precisamos alterar as migrations, adicionando uma chave estrangeira no model Event
+
+
+
+
+CRIACAO:
+    adicione uma nova migration:
+        php artisan make:migration add_user_id_to_events_table
+
+    adicione nessa migration:
+        coloque no up:
+            $table -> foreignId('user_id') -> constrained(); #adiciona uma chave estrangeira de outro usuario
