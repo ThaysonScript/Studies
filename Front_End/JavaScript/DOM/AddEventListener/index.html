@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AddEventListener</title>
+    <style>
+        .c1, .c2 {
+            display: flex;
+            justify-content: center;
+            width: 200px;
+            border: 4px solid #888;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 5px 0px;
+            cursor: pointer;
+        }
+
+        .c1:hover, .c2:hover {
+            border-color: #f00;
+        }
+
+        .c1 {
+            background-color: #ccc;
+            color: #444;
+        }
+
+        .c2 {
+            background-color: #444;
+            color: #ccc;
+        }
+
+        .importante {
+            background-color: #800 !important;
+            color: #fcc !important;
+            border-color: #f00 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- EVENTOS JAVASCRIPT DENTRO DO HTML -->
+    <div id="c1" class="curso c1" onclick="msg()">HTML</div>
+    <div id="c2" class="curso c1" onclick="msg1()">CSS</div>
+    <div id="c3" class="curso c1">JAVASCRIPT</div>
+    <div id="c4" class="curso c1">PHP</div>
+    <div id="c5" class="curso c1">REACT</div>
+    <div id="c6" class="curso c1">MYSQL</div>
+    <div id="c7" class="curso c2">C++</div>
+    <div id="c8" class="curso c2">C#</div>
+    <div id="c9" class="curso c2">ARDUINO</div>
+    <div id="c10" class="curso c2">REACTNATIVE</div>
+    <div id="c11" class="curso c2">PYTHON</div>
+    <div id="c12" class="curso c2">RUST</div>
+    <p id="p1">mais um</p>
+    <p id="p2">outro1</p>
+    <p id="p3">outro2</p>
+    <div><p>OUTRO HTML</p></div>
+    <div><p>OUTRO CSS</p></div>
+    <div><p>OUTRO JAVASCRIPT</p></div>
+    <script src="index.js"></script>
+</body>
+</html>
