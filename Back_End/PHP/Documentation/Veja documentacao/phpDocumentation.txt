@@ -1,0 +1,3 @@
+Manual: https://www.php.net/manual/pt_BR/
+
+Referência da Linguagem: https://www.php.net/manual/pt_BR/langref.php
