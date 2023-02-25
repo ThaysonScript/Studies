@@ -28,3 +28,5 @@ const menor = idade.filter((val, indic, arr) => {
 console.log(idade);
 console.log(maior2);
 console.log(menor);
+
+// o filter pode ser passado 3 argumentos opcionais e ele faz a filtragem de dados, serve como um map, mas é mais prático quando tiver que tratar os seus dados em condicoes por exemplo
