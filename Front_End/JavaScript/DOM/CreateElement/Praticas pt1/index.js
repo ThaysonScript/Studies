@@ -37,6 +37,10 @@ cursos.map((el, key) => {
     // adicionando cada valor passado do array para o nova tag criada
     criarNovoElemento.innerHTML = el
 
+    criarNovoElemento.addEventListener("click", (e) => {
+        caixa1.removeChild(e.target)
+    })
+
     // anexando a div de cada array criado a sua tag pai
     caixa1.appendChild(criarNovoElemento)
 })
