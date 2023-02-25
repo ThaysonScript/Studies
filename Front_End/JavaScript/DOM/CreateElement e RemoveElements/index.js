@@ -37,6 +37,8 @@ cursos.map((el, key) => {
     // adicionando cada valor passado do array para o nova tag criada
     criarNovoElemento.innerHTML = el
 
+
+    // removendo elementos
     criarNovoElemento.addEventListener("click", (e) => {
         caixa1.removeChild(e.target)
     })
