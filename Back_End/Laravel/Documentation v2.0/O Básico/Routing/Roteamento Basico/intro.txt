@@ -3,3 +3,64 @@ use Illuminate\Support\Facades\Route;
 Route::get('/greeting', function () {
     return 'Hello World';
 });
+
+
+/greeting   =   URI/endereço
+
+function return 'Hello World'   =   pra onde o endereço/URI sera redirecionado
+
+
+
+Os arquivos de rota padrão:
+    todas as rotas são definidas no diretorio "routes"
+
+    Sao carregados automaticamente pelo arquivo "App\Providers\RouteServiceProvider"
+
+    O arquivo "routes/web.php" define as rotas que vão para a interface web
+
+    Essas rotas são atribuídas ao grupo "web de middleware", que fornece recursos como "estado da sessão e proteção CSRF".
+
+    As rotas "routes/api.php" são "sem estado" e são atribuídas ao grupo "api de middleware".
+
+    As rotas definidas em "routes/web.php" podem ser acessadas inserindo a URL da rota definida em seu navegador.
+
+    a maioria das aplicacoes, suas rotas serao definidas no arquivo "routes/web.php"
+
+    Por exemplo, você pode acessar a seguinte rota navegando http://example.com/user em seu navegador:
+
+        use App\Http\Controllers\UserController;
+ 
+        Route::get('/user', [UserController::class, 'index']);
+
+
+    As rotas definidas no arquivo "routes/api.php" são aninhadas em um grupo de rotas pelo "RouteServiceProvider".
+
+    Nesse grupo, o prefixo "/api" URI é aplicado automaticamente, portanto, não é necessário aplicá-lo manualmente a todas as rotas do arquivo. Você pode modificar o prefixo e outras opções de grupo de rota modificando sua classe "RouteServiceProvider".
+
+
+Métodos de roteador disponíveis:
+    O roteador permite cadastrar rotas que respondem a qualquer verbo HTTP:
+
+        Route::get($uri endereço/rota, $callback function);
+        Route::post($uri endereço/rota, $callback function);
+        Route::put($uri endereço/rota, $callback function);
+        Route::patch($uri endereço/rota, $callback function);
+        Route::delete($uri endereço/rota, $callback function);
+        Route::options($uri endereço/rota, $callback function);
+
+
+    Às vezes, pode ser necessário registrar uma rota que responda a vários verbos HTTP. Você pode fazer isso usando o método "match". Ou ainda, você pode registrar uma rota que responda a todos os verbos HTTP usando o método "any":
+
+        Route::match(['get', 'post'], '/', function () {
+            // ... aqui pegara somente os verbos http get e post
+        });
+        
+        Route::any('/', function () {
+            // ... aqui pegara qualquer tipo de verbo http
+        });
+
+    CUIDADO!    =   ao definir varias rotas, as mais usadas como get e post tem mais precedencia ao ser solicitada. As outras como put, patch, delete, match, any, redirect e options são sempre executadas depois de get e post:
+
+        "Com base na sua pergunta, vou explicar passo a passo a lógica por trás da afirmação de que, ao definir várias rotas que compartilham o mesmo URI, as rotas que usam os métodos GET, POST, PUT, PATCH, DELETE, OPTIONS, ANY, MATCH, e REDIRECT devem ser definidas antes das rotas que usam os métodos PUT, PATCH, DELETE, OPTIONS, ANY, MATCH e REDIRECT."
+
+    
