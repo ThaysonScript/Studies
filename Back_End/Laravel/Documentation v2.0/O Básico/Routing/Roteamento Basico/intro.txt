@@ -12,6 +12,7 @@ function return 'Hello World'   =   pra onde o endereço/URI sera redirecionado
 
 
 Os arquivos de rota padrão:
+
     todas as rotas são definidas no diretorio "routes"
 
     Sao carregados automaticamente pelo arquivo "App\Providers\RouteServiceProvider"
@@ -39,6 +40,7 @@ Os arquivos de rota padrão:
 
 
 Métodos de roteador disponíveis:
+
     O roteador permite cadastrar rotas que respondem a qualquer verbo HTTP:
 
         Route::get($uri endereço/rota, $callback function);
@@ -64,3 +66,53 @@ Métodos de roteador disponíveis:
         "Com base na sua pergunta, vou explicar passo a passo a lógica por trás da afirmação de que, ao definir várias rotas que compartilham o mesmo URI, as rotas que usam os métodos GET, POST, PUT, PATCH, DELETE, OPTIONS, ANY, MATCH, e REDIRECT devem ser definidas antes das rotas que usam os métodos PUT, PATCH, DELETE, OPTIONS, ANY, MATCH e REDIRECT."
 
     
+Injeção de dependência:
+
+    Você pode digitar qualquer dependência exigida por sua rota na assinatura de retorno de chamada de sua rota. 
+    
+    As dependências declaradas serão automaticamente resolvidas e injetadas no callback pelo contêiner de serviço Laravel.
+    
+    Por exemplo, você pode digitar a dica da classe "Illuminate\Http\Request" para que a solicitação HTTP atual seja injetada automaticamente em seu retorno de chamada de rota:
+
+        use Illuminate\Http\Request;
+        
+        Route::get('/users', function (Request $request) {
+            //... return $request ---> retornando a dependência
+        });
+
+
+Proteção CSRF:
+
+    Lembre-se de que todos os formulários HTML apontando para as rotas "POST, PUT, PATCH ou DELETE" definidas no arquivo web de rotas devem incluir "um campo de token CSRF". 
+    
+    Caso contrário, o pedido será rejeitado. Você pode ler mais sobre proteção CSRF na documentação CSRF:
+
+    Exemplo de aplicacao:
+
+        <form method="POST" action="/profile">
+            @csrf
+            ...
+        </form>
+
+
+
+Rotas de Redirecionamento:
+
+    Se você estiver definindo uma rota que redireciona para outra URI, você pode usar o método "Route::redirect".
+
+    Este método fornece um atalho conveniente para que você não precise definir uma rota ou controlador completo para executar um redirecionamento simples, exemplo:
+
+        Route::redirect('/aqui', '/para aqui');
+
+    
+    Por padrão, "Route::redirect" retorna um código de status "302".
+    
+    Você pode personalizar o código de status usando o terceiro parâmetro opcional:
+
+        Route::redirect('/here', '/there', 301);
+
+    Ou você pode usar o método "Route::permanentRedirect" para retornar um código de status "301":
+
+        Route::permanentRedirect('/here', '/there');
+
+    CUIDADO!    =   Ao usar parâmetros de rota em rotas de redirecionamento, os seguintes parâmetros são reservados pelo Laravel e não podem ser usados: "destination e status".
