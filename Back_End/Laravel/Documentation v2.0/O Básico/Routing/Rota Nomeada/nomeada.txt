@@ -1,0 +1,59 @@
+As rotas nomeadas permitem a geração de URLs ou redireciona para rotas específicas.
+ 
+Você pode especificar um nome para uma rota usando o método "name" na definição da rota:
+
+    Route::get('/user/profile', function () {
+        // ...
+    })->name('profile');
+
+
+Você também pode especificar nomes de rotas para ações do controlador:
+
+    Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile');
+
+    ! Os nomes das rotas sempre devem ser exclusivos.
+
+
+
+Gerando URLs para Rotas Nomeadas:
+
+    Depois de atribuir um nome a uma rota, pode usar o nome da rota ao gerar uma URL ou redirecionar ao Laravel as funções auxiliares route e redirect:
+
+        // Gerando URLs...
+        $url = route('profile');
+        
+        // Gerando Redirects...
+        return redirect()->route('profile');
+        
+        // ou essa
+        return to_route('profile');
+
+
+    Se a rota nomeada usar parâmetros, poderá passar os parâmetros como o segundo argumento para a função route. 
+    
+    Os parâmetros usados serão inseridos automaticamente na URL gerada em suas posições corretas:
+
+        Route::get('/user/{id}/profile', function (string $id) {
+            // ...
+        })->name('profile');
+        
+        $url = route('profile', ['id' => 1]);
+
+
+    Se você passar parâmetros adicionais no array, esses pares de chave/valor serão adicionados automaticamente à string de consulta da URL gerada:
+
+        Route::get('/user/{id}/profile', function (string $id) {
+            // ...
+        })->name('profile');
+        
+        $url = route('profile', ['id' => 1, 'photos' => 'yes']);
+        
+        // /user/1/profile?photos=yes
+
+
+    Às vezes, você pode desejar especificar valores padrão de toda a solicitação para parâmetros de URL, como a localidade atual. Para fazer isso, você pode usar o método URL::defaults.
+
+
+
+
+Inspecionando a Rota Atual:
