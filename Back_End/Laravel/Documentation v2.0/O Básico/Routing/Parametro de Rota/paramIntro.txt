@@ -1,0 +1,128 @@
+Parametros necessarios:
+
+    Se for necessario obter segmentos do uri na sua rota, ou seja, um id do usuario na url:
+
+        APENAS UM ID
+        Route::get('/user/{id}', function (string $id) {
+            return 'User '.$id;
+        });
+
+        VARIOS IDS
+        Route::get('/posts/{post}/comments/{comment}', function (string $postId, string $commentId) {
+            // ...
+        });
+
+    Esses Parametros sao definidos sempre em {}
+    Os caracteres devem ser sempre alfabeticos ou com _
+
+    Esses Parametros sao sempre retornados por chamadas de uma funcao/controller
+
+
+
+Parametros e injecao de dependencias:
+
+    Se desejar que a rota tenha uma dependencia a ser passada e depois ela ser passada para uma funcao e servir como o retorno dessa funcao:
+
+        use Illuminate\Http\Request;
+ 
+        Route::get('/user/{id}', function (Request $request, string $id) {
+            return 'User '.$id;
+        });
+
+
+
+Parametros Opcionais:
+
+    Passar um valor pre definido para a rota, caso nao seja passado nenhum parametro
+
+    Exemplos:
+        Route::get('/user/{name?}', function (string $name = null) {
+            return $name;
+        });
+
+        
+        Route::get('/user/{name?}', function (string $name = 'John') {
+            return $name;
+        });
+
+
+
+
+Restrições de Expressão Regular:
+
+    O método where aceita o nome do parâmetro e uma expressão regular definindo como o parâmetro deve ser restringido:
+
+        Route::get('/user/{name}', function (string $name) {
+            // ...
+        })->where('name', '[A-Za-z]+');
+        
+        Route::get('/user/{id}', function (string $id) {
+            // ...
+        })->where('id', '[0-9]+');
+        
+        Route::get('/user/{id}/{name}', function (string $id, string $name) {
+            // ...
+        })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+
+
+
+    Por conveniência, alguns padrões de expressão regular comumente usados ​​têm métodos auxiliares que permitem adicionar rapidamente restrições por padrão às suas rotas:
+
+        Route::get('/user/{id}/{name}', function (string $id, string $name) {
+            // ...
+        })->whereNumber('id')->whereAlpha('name');
+        
+        Route::get('/user/{name}', function (string $name) {
+            // ...
+        })->whereAlphaNumeric('name');
+        
+        Route::get('/user/{id}', function (string $id) {
+            // ...
+        })->whereUuid('id');
+        
+        Route::get('/user/{id}', function (string $id) {
+            //
+        })->whereUlid('id');
+        
+        Route::get('/category/{category}', function (string $category) {
+            // ...
+        })->whereIn('category', ['movie', 'song', 'painting']);
+
+
+    Se a solicitação recebida não corresponder às restrições do padrão de rota, uma resposta HTTP 404 será retornada.
+
+
+
+Restrições Globais:
+
+    Se você quiser que um parâmetro de rota seja sempre limitado por uma determinada expressão regular, você pode usar o nmétodo pattern. Você deve definir esses padrões no método boot da sua class App\Providers\RouteServiceProvider:
+
+    /*
+    * Define your route model bindings, pattern filters, etc.
+    */
+
+    public function boot(): void
+    {
+        Route::pattern('id', '[0-9]+');
+    }
+
+
+    Uma vez definido o padrão, ele é aplicado automaticamente a todas as rotas que usam esse nome de parâmetro:
+
+        Route::get('/user/{id}', function (string $id) {
+            // Only executed if {id} is numeric...
+        });
+
+
+
+Barras Codificadas:
+
+    O componente de roteamento do Laravel permite que todos os caracteres, exceto os valores dos parâmetros de rota "/", estejam presentes. Você deve permitir explicitamente que o "/" faça parte do seu espaço reservado usando uma expressão regular de condição where:
+
+        Route::get('/search/{search}', function (string $search) {
+            return $search;
+        })->where('search', '.*');
+
+
+    ! Barras codificadas são suportadas apenas no último segmento de rota.
+
