@@ -116,3 +116,35 @@ Rotas de Redirecionamento:
         Route::permanentRedirect('/here', '/there');
 
     CUIDADO!    =   Ao usar parâmetros de rota em rotas de redirecionamento, os seguintes parâmetros são reservados pelo Laravel e não podem ser usados: "destination e status".
+
+
+Rotas que retornam views:
+
+    Pode retornar uma view diretamente na rota de forma simples e rapida:
+
+        PARAMETRO 1 = URI
+        PARAMETRO 2 = NOME PARA EXIBIR
+        PARAMETRO 3 opcional ['name' => 'Taylor'] = dados passados para serem exibidos na view
+
+        Route::view('/welcome', 'welcome');
+ 
+        Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
+
+Listando rotas:
+
+    Ver rotas definidas:
+        php artisan route:list
+
+    Obter o middleware da rota:
+        php artisan route:list -v
+
+    Obter apenas uma rota especifica:
+        php artisan route:list --path=api
+
+    Ocultar uma rota definida por pacote de terceiros:
+        php artisan route:list --except-vendor
+
+    Mostrar rotas definidas por pacotes de terceiros:
+        php artisan route:list --only-vendor
+
+    
