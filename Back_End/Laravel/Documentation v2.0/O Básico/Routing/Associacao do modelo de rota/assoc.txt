@@ -1,0 +1,289 @@
+Associação do modelo de rota:
+
+    Ao injetar um ID de modelo em uma rota ou ação do controlador, você frequentemente consultará o banco de dados para recuperar o modelo que corresponde a esse ID. 
+    
+    Laravel route model binding fornece uma maneira conveniente de injetar automaticamente as instâncias do modelo diretamente em suas rotas. 
+    
+    Por exemplo, em vez de injetar o ID de um usuário, você pode injetar toda a instância "User" do modelo que corresponda ao ID fornecido.
+
+
+
+Ligação Implícita:
+
+    O Laravel resolve automaticamente modelos Eloquent definidos em rotas ou ações do controlador cujos nomes de variáveis ​​de tipo sugerido correspondem a um nome de segmento de rota. 
+    
+    Por exemplo:
+
+        use App\Models\User;
+        
+        Route::get('/users/{user}', function (User $user) {
+            return $user->email;
+        });
+
+
+    Uma vez que a variável $user é indicada como modelo Eloquent App\Models\User e o nome da variável corresponde ao segmento URI {user}, o Laravel injetará automaticamente a instância do modelo que possui um ID correspondente ao valor correspondente do URI de solicitação. 
+    
+    Se uma instância de modelo correspondente não for encontrada no banco de dados, uma resposta HTTP 404 será gerada automaticamente.
+
+    Obviamente, a ligação implícita também é possível ao usar métodos do controlador. 
+    
+    Novamente, observe que o segmento URI {user} corresponde à variável $user no controlador que contém uma dica de tipo App\Models\User:
+
+        use App\Http\Controllers\UserController;
+        use App\Models\User;
+        
+        // Route definition...
+        Route::get('/users/{user}', [UserController::class, 'show']);
+        
+        // Controller method definition...
+        public function show(User $user)
+        {
+            return view('user.profile', ['user' => $user]);
+        }
+
+
+
+Modelos Excluídos Suavemente:
+
+    Normalmente, a vinculação implícita de modelo não recuperará modelos que foram excluídos de forma reversível. 
+    
+    No entanto, você pode instruir a ligação implícita para recuperar esses modelos encadeando o método withTrashed na definição de sua rota:
+
+        use App\Models\User;
+        
+        Route::get('/users/{user}', function (User $user) {
+            return $user->email;
+        })->withTrashed();
+
+
+
+Personalizando a chave:
+
+    Às vezes, você pode querer resolver modelos Eloquent usando uma coluna diferente de id. 
+    
+    Para fazer isso, você pode especificar a coluna na definição do parâmetro de rota:
+
+        use App\Models\Post;
+        
+        Route::get('/posts/{post:slug}', function (Post $post) {
+            return $post;
+        });
+
+
+    Se você deseja que o model binding sempre use uma coluna de banco de dados diferente id ao recuperar uma determinada classe de modelo, você pode substituir o método getRouteKeyName no modelo Eloquent:
+
+        /**
+        * Get the route key for the model.
+        */
+
+        public function getRouteKeyName(): string
+        {
+            return 'slug';
+        }
+
+
+    
+
+Chaves personalizadas e escopo:
+
+    Ao vincular implicitamente vários modelos Eloquent em uma única definição de rota, você pode desejar definir o escopo do segundo modelo Eloquent de forma que ele seja um filho do modelo Eloquent anterior. 
+    
+    Por exemplo, considere esta definição de rota que recupera uma postagem de blog por slug para um usuário específico:
+
+        use App\Models\Post;
+        use App\Models\User;
+        
+        Route::get('/users/{user}/posts/{post:slug}', function (User $user, Post $post) {
+            return $post;
+        });
+
+
+    Ao usar uma vinculação implícita com chave personalizada como um parâmetro de rota aninhada, o Laravel irá automaticamente definir o escopo da consulta para recuperar o modelo aninhado por seu pai usando convenções para adivinhar o nome do relacionamento no pai. 
+    
+    Nesse caso, será assumido que o modelo "User" possui um relacionamento nomeado posts(a forma plural do nome do parâmetro de rota) que pode ser usado para recuperar o modelo Post.
+
+    Se desejar, você pode instruir o Laravel a definir o escopo das ligações "filhos" mesmo quando uma chave personalizada não é fornecida. 
+    
+    Para fazer isso, você pode invocar o método scopeBindings ao definir sua rota:
+
+        use App\Models\Post;
+        use App\Models\User;
+        
+        Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
+            return $post;
+        })->scopeBindings();
+
+
+    Ou você pode instruir um grupo inteiro de definições de rota para usar ligações com escopo:
+
+        Route::scopeBindings()->group(function () {
+            Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
+                return $post;
+            });
+        });
+
+    Da mesma forma, você pode instruir explicitamente o Laravel a não vincular o escopo invocando o método withoutScopedBindings:
+
+        Route::get('/users/{user}/posts/{post:slug}', function (User $user, Post $post) {
+            return $post;
+        })->withoutScopedBindings();
+
+
+
+
+Personalizando o comportamento do modelo ausente:
+
+    Normalmente, uma resposta HTTP 404 será gerada se um modelo vinculado implicitamente não for encontrado. 
+    
+    No entanto, você pode personalizar esse comportamento chamando o método missing ao definir sua rota. 
+    
+    O método missing aceita um fechamento que será invocado se um modelo vinculado implicitamente não puder ser encontrado:
+
+        use App\Http\Controllers\LocationsController;
+        use Illuminate\Http\Request;
+        use Illuminate\Support\Facades\Redirect;
+        
+        Route::get('/locations/{location:slug}', [LocationsController::class, 'show'])
+                ->name('locations.view')
+                ->missing(function (Request $request) {
+                    return Redirect::route('locations.index');
+                });
+
+
+    
+
+Ligação de enumeração implícita:
+
+    PHP 8.1 introduziu suporte para Enums. 
+    
+    Para complementar esse recurso, o Laravel permite que você digite um Enum baseado em string em sua definição de rota e o Laravel só invocará a rota se esse segmento de rota corresponder a um valor Enum válido. 
+    
+    Caso contrário, uma resposta HTTP 404 será retornada automaticamente. 
+    
+    Por exemplo, dado o seguinte Enum:
+
+        <?php
+        
+        namespace App\Enums;
+        
+        enum Category: string
+        {
+            case Fruits = 'fruits';
+            case People = 'people';
+        }
+
+
+    Você pode definir uma rota que só será invocada se o segmento da rota {category} for fruits ou people. 
+    
+    Caso contrário, o Laravel retornará uma resposta HTTP 404:
+
+        use App\Enums\Category;
+        use Illuminate\Support\Facades\Route;
+        
+        Route::get('/categories/{category}', function (Category $category) {
+            return $category->value;
+        });
+
+
+    
+
+
+Ligação Explícita:
+
+    Você não é obrigado a usar a resolução de modelo baseada em convenção implícita do Laravel para usar o model binding. 
+    
+    Você também pode definir explicitamente como os parâmetros de rota correspondem aos modelos. 
+    
+    Para registrar uma ligação explícita, use o método do roteador modelpara especificar a classe para um determinado parâmetro. 
+    
+    Você deve definir seus model bindings explícitos no início do método boot de sua classe RouteServiceProvider:
+
+        use App\Models\User;
+        use Illuminate\Support\Facades\Route;
+        
+        /**
+        * Define your route model bindings, pattern filters, etc.
+        */
+
+        public function boot(): void
+        {
+            Route::model('user', User::class);
+        
+            // ...
+        }
+
+
+    Em seguida, defina uma rota que contenha um parâmetro {user}:
+
+        use App\Models\User;
+        
+        Route::get('/users/{user}', function (User $user) {
+            // ...
+        });
+
+
+    Como vinculamos todos os parâmetros {user} ao modelo App\Models\User, uma instância dessa classe será injetada na rota. 
+    
+    Assim, por exemplo, uma solicitação para users/1 injetará a instância "User" do banco de dados que possui um ID de 1.
+
+    Se uma instância de modelo correspondente não for encontrada no banco de dados, uma resposta HTTP 404 será gerada automaticamente.
+
+
+
+
+Personalizando a lógica de resolução:
+
+    Se você deseja definir sua própria lógica de resolução de ligação de modelo, você pode usar o método Route::bind. 
+    
+    O fechamento que você passar para o método bind receberá o valor do segmento da URI e deverá retornar a instância da classe que deve ser injetada na rota. 
+    
+    Novamente, essa personalização deve ocorrer no método boot do seu aplicativo RouteServiceProvider:
+
+        use App\Models\User;
+        use Illuminate\Support\Facades\Route;
+        
+        /**
+        * Define your route model bindings, pattern filters, etc.
+        */
+
+        public function boot(): void
+        {
+            Route::bind('user', function (string $value) {
+                return User::where('name', $value)->firstOrFail();
+            });
+        
+            // ...
+        }
+
+    Como alternativa, você pode substituir o método resolveRouteBinding em seu modelo Eloquent. 
+    
+    Este método receberá o valor do segmento da URI e deverá retornar a instância da classe que deverá ser injetada na rota:
+
+        /**
+        * Retrieve the model for a bound value.
+        *
+        * @param  mixed  $value
+        * @param  string|null  $field
+        * @return \Illuminate\Database\Eloquent\Model|null
+        */
+
+        public function resolveRouteBinding($value, $field = null)
+        {
+            return $this->where('name', $value)->firstOrFail();
+        }
+
+    Se uma rota estiver utilizando escopo de ligação implícita, o método resolveChildRouteBinding será usado para resolver a ligação filho do modelo pai:
+
+        /**
+        * Retrieve the child model for a bound value.
+        *
+        * @param  string  $childType
+        * @param  mixed  $value
+        * @param  string|null  $field
+        * @return \Illuminate\Database\Eloquent\Model|null
+        */
+        
+        public function resolveChildRouteBinding($childType, $value, $field)
+        {
+            return parent::resolveChildRouteBinding($childType, $value, $field);
+        }
