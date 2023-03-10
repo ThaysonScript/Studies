@@ -57,3 +57,26 @@ Gerando URLs para Rotas Nomeadas:
 
 
 Inspecionando a Rota Atual:
+
+    Se quiser saber se uma solicitação atual foi roteada/ativada para uma rota nomeada usamos o metodo "named" em uma instancia de Route.
+
+    Por exemplo, você pode verificar o nome da rota atual em um middleware de rota:
+
+        use Closure;
+        use Illuminate\Http\Request;
+        use Symfony\Component\HttpFoundation\Response;
+        
+        /**
+        * Handle an incoming request.
+        *
+        * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+        */
+
+        public function handle(Request $request, Closure $next): Response
+        {
+            if ($request->route()->named('profile')) {
+                // ...
+            }
+        
+            return $next($request);
+        }

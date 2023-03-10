@@ -1,0 +1,98 @@
+Grupos de rotas:
+
+    Os grupos de rotas permitem que você compartilhe atributos de rota, como middleware, em um grande número de rotas sem precisar definir esses atributos em cada rota individual.
+
+    Grupos aninhados tentam "mesclar" de forma inteligente atributos com seu grupo pai. 
+    
+    "Middleware" e condições "where" são mesclados enquanto "nomes" e "prefixos" são anexados.
+    
+    Delimitadores de "namespace" e "barras em prefixos" de URI são adicionados automaticamente quando apropriado.
+
+
+
+Middleware:
+
+    Para atribuir um middleware a todas as rotas dentro de um grupo, você pode usar o método middleware antes de definir o grupo.
+    
+    Os middlewares são executados na ordem em que estão listados no array:
+
+        Route::middleware(['first', 'second'])->group(function () {
+            Route::get('/', function () {
+                // Uses first & second middleware...
+            });
+        
+            Route::get('/user/profile', function () {
+                // Uses first & second middleware...
+            });
+        });
+
+
+
+controladores:
+
+    Se um grupo de rotas utilizar o mesmo controlador, você pode usar o método controller para definir o controlador comum para todas as rotas dentro do grupo. 
+    
+    Então, ao definir as rotas, você só precisa fornecer o método do controlador que elas invocam:
+
+        use App\Http\Controllers\OrderController;
+        
+        Route::controller(OrderController::class)->group(function () {
+            Route::get('/orders/{id}', 'show');
+            Route::post('/orders', 'store');
+        });
+
+
+
+
+Roteamento de Subdomínio:
+
+    Os grupos de rotas também podem ser usados ​​para lidar com o roteamento de subdomínio. 
+    
+    Os subdomínios podem receber parâmetros de rota exatamente como URIs de rota, permitindo que você capture uma parte do subdomínio para uso em sua rota ou controlador. 
+    
+
+    O subdomínio pode ser especificado chamando o método domain antes de definir o grupo:
+
+        Route::domain('{account}.example.com')->group(function () {
+            Route::get('user/{id}', function (string $account, string $id) {
+                // ...
+            });
+        });
+
+
+    ! Para garantir que suas rotas de subdomínio sejam acessíveis, você deve registrar as rotas de subdomínio antes de registrar as rotas de domínio raiz. Isso impedirá que as rotas do domínio raiz sobrescrevam as rotas do subdomínio que possuem o mesmo caminho de URI.
+
+
+
+
+Prefixos de rota:
+
+    O método prefix pode ser usado para prefixar cada rota no grupo com um determinado URI. 
+    
+    Por exemplo, você pode querer prefixar todos os URIs de rota dentro do grupo com admin:
+
+        Route::prefix('admin')->group(function () {
+            Route::get('/users', function () {
+                // Matches The "/admin/users" URL
+            });
+        });
+
+
+
+
+Prefixos de nome de rota:
+
+    O método name pode ser usado para prefixar cada nome de rota no grupo com uma determinada string. 
+    
+    Por exemplo, você pode querer prefixar todos os nomes da rota agrupada com admin. 
+    
+    A string fornecida é prefixada ao nome da rota exatamente como é especificada, portanto, forneceremos o caractere final ".   dote" no prefixo:
+
+        Route::name('admin.')->group(function () {
+            Route::get('/users', function () {
+                // Route assigned name "admin.users"...
+            })->name('users');
+        });
+
+
+
