@@ -1,0 +1,148 @@
+Introdução:
+
+    Ao usar qualquer ferramenta no "mundo real", você se sente mais confiante se entender como essa ferramenta funciona. 
+    
+    O desenvolvimento de aplicativos não é diferente. 
+    
+    Quando você entende como suas ferramentas de desenvolvimento funcionam, você se sente mais confortável e confiante em usá-las.
+
+    O objetivo deste documento é fornecer uma boa visão geral de alto nível de como o framework Laravel funciona. 
+    
+    Ao conhecer melhor a estrutura geral, tudo parecerá menos "mágico" e você ficará mais confiante ao criar seus aplicativos. 
+    
+    Se você não entender todos os termos imediatamente, não desanime! 
+    
+    Apenas tente obter uma compreensão básica do que está acontecendo e seu conhecimento aumentará à medida que você explorar outras seções da documentação.
+
+
+
+
+Visão geral do ciclo de vida:
+
+    Primeiros passos:
+
+        O ponto de entrada para todas as solicitações para um aplicativo Laravel é o arquivo public/index.php. 
+        
+        Todas as requisições são direcionadas para este arquivo pela configuração do seu servidor web (Apache/Nginx). 
+        
+        O arquivo index.php não contém muito código. 
+        
+        Em vez disso, é um ponto de partida para carregar o restante da estrutura.
+
+        O arquivo index.php carrega a definição do autoloader gerada pelo Composer e, em seguida, recupera uma instância do aplicativo Laravel de bootstrap/app.php. 
+        
+        A primeira ação tomada pelo próprio Laravel é criar uma instância do contêiner de aplicativo/serviço.
+
+
+    Kernels HTTP/Console:
+
+        Em seguida, a solicitação recebida é enviada para o kernel HTTP ou para o kernel do console, dependendo do tipo de solicitação que está entrando no aplicativo. 
+        
+        Esses dois kernels servem como o local central pelo qual todas as solicitações fluem. 
+        
+        Por enquanto, vamos nos concentrar apenas no kernel HTTP, que está localizado em app/Http/Kernel.php.
+
+        O kernel HTTP estende a classe Illuminate\Foundation\Http\Kernel, que define um array de bootstrappers que será executado antes que a requisição seja executada. 
+        
+        Esses bootstrappers configuram o tratamento de erros, configuram o log, detectam o ambiente do aplicativo e executam outras tarefas que precisam ser feitas antes que a solicitação seja realmente tratada. 
+        
+        Normalmente, essas classes lidam com a configuração interna do Laravel com a qual você não precisa se preocupar.
+
+        O kernel HTTP também define uma lista de middleware HTTP pela qual todas as solicitações devem passar antes de serem tratadas pelo aplicativo. 
+        
+        Esses middleware lidam com a leitura e gravação da sessão HTTP , determinando se o aplicativo está no modo de manutenção, verificando o token CSRF e muito mais. Falaremos mais sobre isso em breve.
+
+        A assinatura do método do kernel HTTP handle é bem simples:
+
+            ele recebe um Request e retorna um Response. 
+            
+            Pense no kernel como uma grande caixa preta que representa todo o seu aplicativo. 
+            
+            Alimente-o com solicitações HTTP e ele retornará respostas HTTP.
+
+
+
+
+    Provedores de serviço:
+        
+        Uma das ações de inicialização do kernel mais importantes é carregar os provedores de serviço para seu aplicativo. 
+        
+        Os provedores de serviços são responsáveis ​​por inicializar todos os vários componentes da estrutura, como banco de dados, fila, validação e componentes de roteamento. 
+        
+        Todos os provedores de serviços para o aplicativo são configurados na matriz config/app.php do arquivo de configuração providers.
+
+        O Laravel irá percorrer esta lista de provedores e instanciar cada um deles. 
+        
+        Após instanciar os provedores, o método register será chamado em todos os provedores. 
+        
+        Então, uma vez que todos os provedores tenham sido registrados, o método boot será chamado em cada provedor. 
+        
+        Isso ocorre para que os provedores de serviços possam depender de cada associação de contêiner registrada e disponível no momento em que seu método boot é executado.
+
+        Essencialmente, todos os principais recursos oferecidos pelo Laravel são inicializados e configurados por um provedor de serviços. 
+        
+        Como eles inicializam e configuram tantos recursos oferecidos pelo framework, os provedores de serviços são o aspecto mais importante de todo o processo de inicialização do Laravel.
+
+
+
+
+    Roteamento:
+
+        Um dos provedores de serviços mais importantes em seu aplicativo é o App\Providers\RouteServiceProvider. 
+        
+        Este provedor de serviços carrega os arquivos de rota contidos no diretório routes do seu aplicativo. 
+        
+        Vá em frente, abra o código RouteServiceProvider e veja como ele funciona!
+
+        Depois que o aplicativo for inicializado e todos os provedores de serviços forem registrados, o Request será enviado ao roteador para despacho. 
+        
+        O roteador despachará a solicitação para uma rota ou controlador, bem como executará qualquer middleware específico de rota.
+
+        O middleware fornece um mecanismo conveniente para filtrar ou examinar as solicitações HTTP que entram em seu aplicativo. 
+        
+        Por exemplo, o Laravel inclui um middleware que verifica se o usuário da sua aplicação está autenticado. 
+        
+        Se o usuário não estiver autenticado, o middleware redirecionará o usuário para a tela de login. 
+        
+        No entanto, se o usuário estiver autenticado, o middleware permitirá que a solicitação prossiga para o aplicativo. 
+        
+        Alguns middlewares são atribuídos a todas as rotas dentro do aplicativo, como aquelas definidas na propriedade $middleware de seu kernel HTTP, enquanto alguns são atribuídos apenas a rotas específicas ou grupos de rotas. 
+        
+        Você pode aprender mais sobre middleware lendo a documentação completa de middleware.
+
+        Se a solicitação passar por todo o middleware atribuído à rota correspondente, a rota ou o método do controlador será executado e a resposta retornada pela rota ou pelo método do controlador será enviada de volta pela cadeia de middleware da rota.
+
+
+
+
+
+    Terminando:
+
+        Depois que a rota ou o método do controlador retornar uma resposta, a resposta viajará de volta para fora através do middleware da rota, dando ao aplicativo a chance de modificar ou examinar a resposta de saída.
+
+        Finalmente, uma vez que a resposta viaja de volta pelo middleware, o método handle do kernel HTTP retorna o objeto de resposta e o arquivo index.php chama o método send na resposta retornada. 
+        
+        O método send envia o conteúdo da resposta para o navegador da web do usuário. 
+        
+        Terminamos nossa jornada por todo o ciclo de vida da solicitação do Laravel!
+
+
+
+
+
+
+Foco em provedores de serviços:
+
+    Os provedores de serviços são realmente a chave para inicializar um aplicativo Laravel. 
+    
+    A instância do aplicativo é criada, os provedores de serviços são registrados e a solicitação é entregue ao aplicativo inicializado. É realmente tão simples!
+
+    Ter uma compreensão firme de como um aplicativo Laravel é construído e inicializado por meio de provedores de serviços é muito valioso. 
+    
+    Os provedores de serviço padrão do seu aplicativo são armazenados no diretório app/Providers.
+
+    Por padrão, o AppServiceProvider está bastante vazio. 
+    
+    Esse provedor é um ótimo lugar para adicionar as próprias ligações de inicialização e contêiner de serviço do seu aplicativo. 
+    
+    Para aplicativos grandes, você pode criar vários provedores de serviços, cada um com inicialização mais granular para serviços específicos usados ​​pelo seu aplicativo.

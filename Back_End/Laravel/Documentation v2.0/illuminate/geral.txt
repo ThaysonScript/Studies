@@ -1,0 +1,3 @@
+Illuminate === armazena todos os diretorios de funcionamento do laravel, serviços, etc
+
+gerenciado pelo composer

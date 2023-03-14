@@ -1,0 +1,148 @@
+Introdução:
+
+    O contêiner de serviço Laravel é uma ferramenta poderosa para gerenciar dependências de classe e realizar injeção de dependência. 
+    
+    Injeção de dependência é uma frase elegante que basicamente significa isso: 
+        as dependências de classe são "injetadas" na classe por meio do construtor ou, em alguns casos, métodos "setter".
+
+    Vejamos um exemplo simples:
+
+        <?php
+        
+        namespace App\Http\Controllers;
+        
+        use App\Http\Controllers\Controller;
+        use App\Repositories\UserRepository;
+        use App\Models\User;
+        use Illuminate\View\View;
+        
+        class UserController extends Controller
+        {
+            /**
+            * Create a new controller instance.
+            */
+            public function __construct(
+                protected UserRepository $users,
+            ) {}
+        
+            /**
+            * Show the profile for the given user.
+            */
+            public function show(string $id): View
+            {
+                $user = $this->users->find($id);
+        
+                return view('user.profile', ['user' => $user]);
+            }
+        }
+
+    Neste exemplo, o UserController precisa recuperar usuários de uma fonte de dados. 
+    
+    Então, vamos injetar um serviço capaz de recuperar usuários. 
+    
+    Nesse contexto, nosso UserRepositorymais provável é usar o Eloquent para recuperar informações do usuário do banco de dados. 
+    
+    No entanto, como o repositório é injetado, podemos trocá-lo facilmente por outra implementação. 
+    
+    Também podemos facilmente "zombar" ou criar uma implementação fictícia do UserRepositoryao testar nosso aplicativo.
+
+    Uma compreensão profunda do contêiner de serviço Laravel é essencial para construir um aplicativo grande e poderoso, bem como para contribuir com o próprio núcleo do Laravel.
+
+    
+
+Resolução de configuração zero:
+
+    Se uma classe não tiver dependências ou depender apenas de outras classes concretas (não interfaces), o container não precisa ser instruído sobre como resolver essa classe. 
+    
+    Por exemplo, você pode colocar o seguinte código em seu arquivo routes/web.php:
+
+        <?php
+        
+        class Service
+        {
+            // ...
+        }
+        
+        Route::get('/', function (Service $service) {
+            die(get_class($service));
+        });
+
+    Neste exemplo, atingir a rota / de seu aplicativo resolverá automaticamente a classe Service e a injetará no manipulador de sua rota. 
+    
+    Isso é uma mudança de jogo. Isso significa que você pode desenvolver seu aplicativo e aproveitar a injeção de dependência sem se preocupar com arquivos de configuração inchados.
+
+    Felizmente, muitas das classes que você escreverá ao criar um aplicativo Laravel recebem automaticamente suas dependências por meio do contêiner, incluindo controladores, ouvintes de evento, middleware e muito mais. 
+    
+    Além disso, você pode digitar dependências de dicas no método handle de trabalhos em fila.
+    
+    Depois de experimentar o poder da injeção de dependência automática e de configuração zero, parece impossível desenvolver sem ela.
+
+
+
+
+Quando usar o recipiente:
+
+    Graças à resolução de configuração zero, muitas vezes você irá sugerir dependências de tipo em rotas, controladores, ouvintes de eventos e em outros lugares sem nunca interagir manualmente com o contêiner. 
+    
+    Por exemplo, você pode digitar o objeto Illuminate\Http\Request em sua definição de rota para que possa acessar facilmente a solicitação atual. 
+    
+    Embora nunca tenhamos que interagir com o contêiner para escrever esse código, ele está gerenciando a injeção dessas dependências nos bastidores:
+
+        use Illuminate\Http\Request;
+        
+        Route::get('/', function (Request $request) {
+            // ...
+        });
+
+    Em muitos casos, graças à injeção automática de dependência e às fachadas, você pode criar aplicativos Laravel sem vincular manualmente ou resolver qualquer coisa do contêiner. 
+    
+    Então, quando você interagiria manualmente com o contêiner? Vamos examinar duas situações.
+
+    Primeiro, se você escreve uma classe que implementa uma interface e deseja digitar essa interface em uma rota ou construtor de classe, deve informar ao contêiner como resolver essa interface. 
+    
+    Em segundo lugar, se você estiver escrevendo um pacote Laravel que planeja compartilhar com outros desenvolvedores Laravel, pode ser necessário vincular os serviços do seu pacote ao contêiner.
+
+
+
+Vinculativo:
+
+    Noções básicas de encadernação:
+
+        Ligações Simples:
+
+            Quase todas as associações de contêineres de serviço serão registradas nos provedores de serviços, portanto, a maioria desses exemplos demonstrará o uso do contêiner nesse contexto.
+
+            Dentro de um prestador de serviço, você sempre tem acesso ao container via propriedade $this->app. 
+            
+            Podemos registrar um binding usando o método bind, passando o nome da classe ou interface que desejamos registrar junto com um fechamento que retorna uma instância da classe:
+
+                use App\Services\Transistor;
+                use App\Services\PodcastParser;
+                use Illuminate\Contracts\Foundation\Application;
+                
+                $this->app->bind(Transistor::class, function (Application $app) {
+                    return new Transistor($app->make(PodcastParser::class));
+                });
+
+            Observe que recebemos o próprio contêiner como um argumento para o resolvedor. 
+            
+            Podemos então usar o contêiner para resolver subdependências do objeto que estamos construindo.
+
+            Conforme mencionado, você normalmente estará interagindo com o contêiner dentro dos provedores de serviços; no entanto, se você quiser interagir com o contêiner fora de um provedor de serviços, poderá fazê-lo por meio da App fachada :
+
+                use App\Services\Transistor;
+                use Illuminate\Contracts\Foundation\Application;
+                use Illuminate\Support\Facades\App;
+                
+                App::bind(Transistor::class, function (Application $app) {
+                    // ...
+                });
+
+            ? Não há necessidade de vincular classes ao contêiner se elas não dependerem de nenhuma interface. O contêiner não precisa ser instruído sobre como construir esses objetos, pois pode resolvê-los automaticamente usando reflexão.
+
+
+
+
+        Vinculando um Singleton:
+
+            l

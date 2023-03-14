@@ -1,0 +1,88 @@
+------------------------ALGUNS TESTES--------------------
+
+--Para passar algum controller para uma rota:
+
+Route::get('/', [NomeController::class, 'metodo do controller']);
+
+--Criar um controller (use o nome do controller sempre no singular):
+
+php artisan make:controller NomeController
+
+--Codigo base do controller:
+
+<?php
+
+namespace App\Http\Controller;
+
+use Illuminate\Http\Request;
+
+class NomeController extends Controller
+{
+    //
+}
+
+
+--Atribuindo metodos no controller:
+
+<?php
+
+namespace App\Http\Controller;
+
+use Illuminate\Http\Request;
+
+class NomeController extends Controller
+{
+    public function NomeMetodoController() {
+
+        return "NomeMetodoController";
+
+    }
+}
+
+
+
+--Alguns tipos de metodos recomendados para usar no controller:
+
+o metodo index === geralmente usado para pegar/passar dados para o model e retornar uma view
+
+o metodo show === geralmente usado para pegar/passar dados para o model usando um id para especificar o que quer pegar/passar para o banco de dados e retornar uma view
+
+
+
+
+
+-- O Controller tem que ser importado no route web.php, senão não funcionará:
+
+use App\Http\Controllers\NomeController;
+
+
+
+
+-- Usando parametros em Controllers:
+
+Route::get('/produto/{id?}', [ProdutoController::class, 'show']);
+
+
+<?php
+
+namespace App\Http\Controller;
+
+use Illuminate\Http\Request;
+
+class NomeController extends Controller
+{
+    public function index() {
+        return "index";
+    }
+
+    public function show($id = 0) {
+        return "show:" . $id;
+    }
+}
+
+
+-- Altamente recomendado usar names para as rotas:
+
+Route::get('/', [ProdutoController::class, 'index']) -> name('produto.index');
+
+Route::get('/produto/{id?}', [ProdutoController::class, 'show']) -> name('produto.show');

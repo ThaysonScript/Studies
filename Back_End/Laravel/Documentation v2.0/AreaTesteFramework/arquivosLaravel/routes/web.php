@@ -96,3 +96,6 @@ Route::get('/user', [UserController::class, 'index']);
 
 */
 
+Route::get('/', function() {
+    return view('welcome');
+});
