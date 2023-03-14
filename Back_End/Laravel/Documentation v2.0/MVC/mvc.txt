@@ -1,0 +1,14 @@
+IDEIA:
+
+    Estou no meu computador e acesso a internet (internet = requisição http - request http = acessar uma rota).
+
+    A rota que eu acessei é passada para o controller, o controller faz toda a logica da minha aplicacao, como, se for necessario acessar o model, ele fara isso.
+
+    O meu model será responsável por acessar, gerenciar e entregar dados do banco de dados para o controller.
+
+    O controller, por fim, entregará algo dele proprio ou do model para a view
+
+    A view entregará uma pagina html como resultado.
+
+
+Este é o fluxo MVC === Model - View - Controller
