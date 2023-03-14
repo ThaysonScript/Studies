@@ -96,3 +96,132 @@ Prefixos de nome de rota:
 
 
 
+
+
+----------------------ALGUNS TESTES--------------------
+
+--Vamos supor que eu crie varias rotas de uma rota pai 'administracao':
+
+Route::get('admin/dashboard', function() {
+    return "dashboard";
+});
+
+Route::get('admin/users', function() {
+    return "users";
+});
+
+Route::get('admin/clients', function() {
+    return "clients";
+});
+
+
+--Todas irão funcionar, mas há uma enorme repeticao de rotas disnecessarias, então para deixar o codigo mais limpo e otimizado:
+
+Route::prefix('admin') -> group(function() {
+
+    //aqui podemos colocar as rotas que tem como rota pai 'admin'
+
+    Route::get('dashboard', function() {
+        return "dashboard";
+    });
+
+    Route::get('users', function() {
+        return "users";
+    });
+
+    Route::get('clients', function() {
+        return "clients";
+    });
+});
+
+
+
+--Caso precise nomear essas rotas (usamos a rota pai, no caso, 'admin' e depois temos que usar o '.' e a subrota passada):
+
+Route::prefix('admin') -> group(function() {
+
+    //aqui podemos colocar as rotas que tem como rota pai 'admin'
+
+    Route::get('dashboard', function() {
+
+        return "dashboard";
+
+    }) -> name('admin.dashboard');
+
+    Route::get('users', function() {
+
+        return "users";
+
+    }) -> name('admin.users');
+
+    Route::get('clients', function() {
+
+        return "clients";
+
+    }) -> name('admin.clients');
+});
+
+
+--Vemos acima que há uma repeticao de nome de rotas, para isso, temos tambem um tipo de rota especifica para agrupar rotas por nome:
+
+Route::name('admin.') -> group(function() {
+
+    //aqui podemos colocar as rotas que tem como rota pai 'admin'
+
+    Route::get('admin/dashboard', function() {
+
+        return "dashboard";
+
+    }) -> name('dashboard');
+
+    Route::get('admin/users', function() {
+
+        return "users";
+
+    }) -> name('users');
+
+    Route::get('admin/clients', function() {
+
+        return "clients";
+
+    }) -> name('clients');
+});
+
+
+--Use a rota abaixo para verificar se realmente é redirecionado para a rota nomeada que esta agrupada:
+
+Route::get('/', function() {
+    return redirect() -> route('admin.clients');
+});
+
+
+-- Identificamos que mesmo assim ainda há uma grande gama de codigo que podemos simplificar e otimizar, então usamos o Route::group para passar tanto o prefix como o name:
+
+// 'prefix' === rota pai a ser agrupada
+// 'as' === name de rota pai a ser agrupada em rota nomeada
+
+Route::group( [
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function() {
+
+    //aqui podemos colocar as rotas que tem como rota pai 'admin'
+
+    Route::get('dashboard', function() {
+
+        return "dashboard";
+
+    }) -> name('dashboard');
+
+    Route::get('users', function() {
+
+        return "users";
+
+    }) -> name('users');
+
+    Route::get('clients', function() {
+
+        return "clients";
+
+    }) -> name('clients');
+});

@@ -80,3 +80,21 @@ Inspecionando a Rota Atual:
         
             return $next($request);
         }
+
+
+
+--------------ALGUNS TESTES-------------
+
+--Criei uma rota para acessar noticias:
+
+Route::get('/news', function() {
+    return view('news');
+}) -> name('noticias');
+
+--Supondo que eu queira criar uma nova rota de noviddades de noticias, essa rota teria que acessar a minha rota news e é pra isso que vem a rota nomeada:
+
+Route::get('/novidades', function() {
+    return redirect() -> route('noticias');
+});
+
+--Essa rota acima sera redireciona para a rota 'news' pelo nome atribuido

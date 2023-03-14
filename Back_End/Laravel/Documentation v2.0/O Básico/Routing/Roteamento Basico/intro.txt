@@ -146,5 +146,4 @@ Listando rotas:
 
     Mostrar rotas definidas por pacotes de terceiros:
         php artisan route:list --only-vendor
-
-    
+        
